@@ -7,6 +7,9 @@ namespace SchoolProject.Core
     {
         public static IServiceCollection AddCoreDependencies(this IServiceCollection services)
         {
+            //Mapper
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //Mediator
             return services.AddMediatR(conf => conf.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         }
     }

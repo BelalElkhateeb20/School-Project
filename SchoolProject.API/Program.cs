@@ -24,7 +24,6 @@ namespace SchoolProject.API
             builder.Services.AddInfraStructureDependencies()
                 .AddServiceDependencies()
                 .AddCoreDependencies();
-            
             #endregion
 
 

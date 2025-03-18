@@ -1,22 +1,22 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using SchoolProject.Core.Features.Students.Query.Models;
-using SchoolProject.Data.Entities;
+using SchoolProject.Core.Features.Students.Query.Resopnse;
 using SchoolProject.Service.Abstracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolProject.Core.Features.Students.Query.Handler
 {
-    class StudentHandler(IStudentService studentService) : IRequestHandler<GetStudentListQuery,List<Student>>
+    class StudentHandler(IStudentService studentService , IMapper mapper) : IRequestHandler<GetStudentListQuery,List<GetStudentResponse>>
     {
         private readonly IStudentService _studentService = studentService;
+        private readonly IMapper _mapper = mapper;
 
-        public async Task<List<Student>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetStudentResponse>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
         {
-            return await _studentService.GetStudentsAsync();
+            var studentList= await _studentService.GetStudentsAsync();
+            var studemapp =  _mapper.Map<List<GetStudentResponse>>(studentList);
+            return studemapp;
         }
+
     }
 }
