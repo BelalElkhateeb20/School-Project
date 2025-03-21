@@ -1,17 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
 using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.infraStructure.Data;
+using SchoolProject.infraStructure.InfrastructureBases;
 
 namespace SchoolProject.infraStructure.Repositories
 {
-    class StudentRepository(ApplicationDBContext context) : IStudentRepository
+    public class StudentRepository(ApplicationDBContext context) : GenericRepositoryAsync<Student>(context), IStudentRepository
     {
-        private readonly ApplicationDBContext _context = context;
-
+        private readonly DbSet<Student> _students = context.Set<Student>();
         public async Task<List<Student>> GetStudentsAsync()
         {
-            return await _context.students.Include(D=>D.Department).ToListAsync();
+            return await _students.Include(D=>D.Department).ToListAsync();
+        }
+        public new async Task<Student> GetStudentByIdAsync(int id)
+        {
+            var student = await GetTableNoTracking()
+                .Include(D => D.Department)
+                .Where(s => s.StudID == id)
+                .FirstOrDefaultAsync();
+            return student!;
         }
     }
 }

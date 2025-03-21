@@ -8,12 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolProject.Data\SchoolProject.Data.csproj" />
-    <ProjectReference Include="..\SchoolProject.infraStructure\SchoolProject.infraStructure.csproj" />
     <ProjectReference Include="..\SchoolProject.Service\SchoolProject.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Students\Command\Handler\" />
     <Folder Include="Features\Students\Command\Models\" />
     <Folder Include="Mapping\Students\CommandMapping\" />
   </ItemGroup>

@@ -1,4 +1,6 @@
-﻿using SchoolProject.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using SchoolProject.Data.Entities;
 using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.Service.Abstracts;
 namespace SchoolProject.Service.implementaion
@@ -11,5 +13,12 @@ namespace SchoolProject.Service.implementaion
         {
             return await _studentRepository.GetStudentsAsync();
         }
+        public async Task<Student> GetByIdAsync(int id)
+        {
+            var student = await _studentRepository.GetStudentByIdAsync(id);
+
+            return student!;
+        }
+        
     }
 }
