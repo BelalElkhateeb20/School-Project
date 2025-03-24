@@ -4,7 +4,6 @@ using SchoolProject.Core.Basies;
 using SchoolProject.Core.Features.Students.Query.Models;
 using SchoolProject.Core.Features.Students.Query.Resopnse;
 using SchoolProject.Core.Features.Students.Query.ResponseDTO;
-using SchoolProject.Data.Entities;
 using SchoolProject.Service.Abstracts;
 //Mediator
 namespace SchoolProject.Core.Features.Students.Query.Handler

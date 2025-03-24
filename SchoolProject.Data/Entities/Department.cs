@@ -13,6 +13,7 @@ namespace SchoolProject.Data.Entities
             DepartmentSubjects = new HashSet<DepartmentSubject>();
         }
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DID { get; set; }
         [StringLength(500)]
         public string DName { get; set; }

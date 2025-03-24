@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 
 namespace SchoolProject.Core.Basies
 {
@@ -47,6 +42,15 @@ namespace SchoolProject.Core.Basies
                 Message = Message == null ? "Bad Request" : Message
             };
         }
+        public Response<T> UnprocessableEntity<T>(string Message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = HttpStatusCode.UnprocessableEntity,
+                Succeeded = false,
+                Message = Message
+            };
+        }
         public Response<T> NotFound<T>(string message = null)
         {
             return new Response<T>()
@@ -56,15 +60,14 @@ namespace SchoolProject.Core.Basies
                 Message = message == null ? "Not Found" : message
             };
         }
-        public Response<T> Created<T>(T entity, object Meta = null)
+        public Response<T> Created<T>(T entity, string message = null)
         {
             return new Response<T>()
             {
                 Data = entity,
                 StatusCode = HttpStatusCode.Created,
                 Succeeded = true,
-                Message = "Created",
-                Meta = Meta
+                Message = message == null ? "Created Successfully" : message
             };
         }
 

@@ -8,11 +8,11 @@ namespace SchoolProject.infraStructure.InfrastructureBases
     {
         protected readonly ApplicationDBContext _context = context;
 
-        public async Task<T> AddAsync(T entity)
+        public virtual async  Task<T> AddAsync(T entity)
         {
-            var item = _context.Set<T>().Add(entity);
+             _context.Set<T>().Add(entity);
             await _context.SaveChangesAsync();
-            return item.Entity;
+            return entity;
         }
 
         public async Task AddRangeAsync(ICollection<T> entities)
@@ -43,7 +43,7 @@ namespace SchoolProject.infraStructure.InfrastructureBases
             await _context.SaveChangesAsync();
         }
 
-        public async Task<T> GetStudentByIdAsync(int id)
+        public virtual async Task<T> GetStudentByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
@@ -69,7 +69,7 @@ namespace SchoolProject.infraStructure.InfrastructureBases
 
         }
 
-        public async Task UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
             _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();

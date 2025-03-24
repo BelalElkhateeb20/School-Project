@@ -6,6 +6,8 @@ namespace SchoolProject.Service.Abstracts
     {
         public Task<List<Student>> GetStudentsAsync();
         public Task<Student> GetByIdAsync(int id);
+        public Task<string> AddAsync(Student student );
+
 
     }
 }
