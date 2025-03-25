@@ -28,7 +28,7 @@ namespace SchoolProject.Core.Features.Students.Query.Handler
                 return NotFound<GetStudentResponseById>();
             }
             var studentResponse = _mapper.Map<GetStudentResponseById>(student);
-            return Success(studentResponse);
+            return Found(studentResponse);
         }
     }
 }

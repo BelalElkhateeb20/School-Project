@@ -24,7 +24,7 @@ namespace SchoolProject.Core.Features.Students.Command.Handler
        
             else if (result == "success") 
             {
-                return Created();
+                return Created<string>();
             }
             return BadRequest<string>();
         }

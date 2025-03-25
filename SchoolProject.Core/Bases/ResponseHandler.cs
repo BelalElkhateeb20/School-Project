@@ -1,5 +1,4 @@
 ﻿using System.Net;
-
 namespace SchoolProject.Core.Basies
 {
     public class ResponseHandler
@@ -60,14 +59,23 @@ namespace SchoolProject.Core.Basies
                 Message = message == null ? "Not Found" : message
             };
         }
-        public Response<T> Created<T>(T entity, string message = null)
+        public Response<T> Created<T>( string message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = HttpStatusCode.Created,
+                Succeeded = true,
+                Message = message == null ? "Created Successfully" : message
+            };
+        }
+        public Response<T> Found<T>(T entity, string message = null)
         {
             return new Response<T>()
             {
                 Data = entity,
-                StatusCode = HttpStatusCode.Created,
+                StatusCode = HttpStatusCode.OK,
                 Succeeded = true,
-                Message = message == null ? "Created Successfully" : message
+                Message = message == null ? "Student is Found Successfully" : message
             };
         }
 
