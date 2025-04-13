@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using SchoolProject.Data.Entities;
 using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.Service.Abstracts;
+
 namespace SchoolProject.Service.implementaion
 {
     public class StudentService(IStudentRepository studentRepository) : IStudentService
@@ -29,6 +29,35 @@ namespace SchoolProject.Service.implementaion
                 return "success";
             }
             return "Exists";
+        }
+        public async Task<string> EditAsync(Student _student)
+        {
+            if (_student == null)
+            {
+                return "Error To update";
+            }
+            await _studentRepository.UpdateAsync(_student);
+            return "success";
+        }
+
+        public async Task<bool> IsNameExistAsync(string name)
+        {
+            var student =await _studentRepository.GetTableNoTracking().Where(x => x.Name == name).FirstOrDefaultAsync();
+            if (student == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> IsNameExistExludeSelfAsync(string name, int id)
+        {
+            var student = await _studentRepository.GetTableNoTracking().Where(x => x.Name == name&&x.StudID==id).FirstOrDefaultAsync();
+            if (student == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

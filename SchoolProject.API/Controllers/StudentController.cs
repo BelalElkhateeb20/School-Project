@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolProject.API.Base;
 using SchoolProject.Core.Features.Students.Command.Models;
 using SchoolProject.Core.Features.Students.Query.Models;
@@ -34,6 +33,12 @@ namespace SchoolProject.API.Controllers
             var response= await Mediator.Send(student);
             return NewResult(response);
         }
-
+        [HttpPut]
+        [Route(Router.Student.Update)]
+        public async Task<IActionResult> UpdateAsync( [FromForm] EditStudentCommand student)
+        {
+            var response = await Mediator.Send(student);
+            return NewResult(response);
+        }
     }
 }

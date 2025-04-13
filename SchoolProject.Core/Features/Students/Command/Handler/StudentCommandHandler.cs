@@ -7,7 +7,7 @@ using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Students.Command.Handler
 {
-    public class StudentCommandHandler(IMapper mapper, IStudentService studentService) : ResponseHandler, IRequestHandler<AddStudentCommand,Response<string>>
+    public class StudentCommandHandler(IMapper mapper, IStudentService studentService) : ResponseHandler, IRequestHandler<AddStudentCommand,Response<string>>, IRequestHandler<EditStudentCommand, Response<string>>
     {
         private readonly IMapper _mapper = mapper;
         private readonly IStudentService _studentService = studentService;
@@ -17,16 +17,31 @@ namespace SchoolProject.Core.Features.Students.Command.Handler
         {
             var studentmapping = _mapper.Map<Student>(request);
             var result = await _studentService.AddAsync(studentmapping);
-            if (result == "Exists")
-            {
-                return UnprocessableEntity<string>("Student already exists");
-            }
-       
-            else if (result == "success") 
+            if (result == "success") 
             {
                 return Created<string>();
             }
             return BadRequest<string>();
+        }
+
+        public async Task<Response<string>>Handle(EditStudentCommand request, CancellationToken cancellationToken)
+        {
+            //Check if the student exists
+            var student = await _studentService.GetByIdAsync(request.Id);
+            if (student == null)
+            {
+               return NotFound<string>();
+            }
+            _mapper.Map(request, student);
+            var result = await _studentService.EditAsync(student);
+
+            if (result == "success")
+            {
+                return Success("Updated Successfully");
+            }
+            else
+                return BadRequest<string>();
+
         }
     }
 }
