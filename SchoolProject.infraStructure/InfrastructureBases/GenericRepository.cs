@@ -43,7 +43,7 @@ namespace SchoolProject.infraStructure.InfrastructureBases
             await _context.SaveChangesAsync();
         }
 
-        public virtual async Task<T> GetStudentByIdAsync(int id)
+        public async Task<T> GetStudentByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

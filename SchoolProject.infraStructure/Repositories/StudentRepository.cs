@@ -17,10 +17,19 @@ namespace SchoolProject.infraStructure.Repositories
         public new async Task<Student> GetStudentByIdAsync(int id)
         {
             var student = await GetTableNoTracking()
-                .Include(D => D.Department)
                 .Where(s => s.StudID == id)
                 .FirstOrDefaultAsync();
-            return student!;
+            return student;
+        }
+
+        public async Task<Student> GetStudentByIdWithIncludeAsync(int id)
+        {
+            var student = await GetTableNoTracking()
+
+               .Include(D => D.Department)
+               .Where(s => s.StudID == id)
+               .FirstOrDefaultAsync();
+                       return student;
         }
     }
 }

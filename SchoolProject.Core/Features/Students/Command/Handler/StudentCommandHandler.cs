@@ -7,7 +7,7 @@ using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Students.Command.Handler
 {
-    public class StudentCommandHandler(IMapper mapper, IStudentService studentService) : ResponseHandler, IRequestHandler<AddStudentCommand,Response<string>>, IRequestHandler<EditStudentCommand, Response<string>>
+    public class StudentCommandHandler(IMapper mapper, IStudentService studentService) : ResponseHandler, IRequestHandler<AddStudentCommand,Response<string>>, IRequestHandler<EditStudentCommand, Response<string>>, IRequestHandler<DeleteStudentCommand, Response<string>>
     {
         private readonly IMapper _mapper = mapper;
         private readonly IStudentService _studentService = studentService;
@@ -42,6 +42,23 @@ namespace SchoolProject.Core.Features.Students.Command.Handler
             else
                 return BadRequest<string>();
 
+        }
+
+        public async Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
+        {
+            var student = await _studentService.GetByIdAsync(request.Id);
+            if (student == null)
+            {
+                return NotFound<string>();
+            }
+            var result = await _studentService.DeleteAsync(student);
+
+            if (result == "success")
+            {
+                return Deleted<string>();
+            }
+            else
+                return BadRequest<string>();
         }
     }
 }

@@ -6,6 +6,7 @@ namespace SchoolProject.infraStructure.InfrastructureBases
     {
         Task DeleteRangeAsync(ICollection<T> entities);
         Task<T> GetStudentByIdAsync(int id);
+
         Task SaveChangesAsync();
         IDbContextTransaction BeginTransaction();
         void Commit();

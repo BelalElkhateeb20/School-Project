@@ -2,7 +2,7 @@
 using SchoolProject.API.Base;
 using SchoolProject.Core.Features.Students.Command.Models;
 using SchoolProject.Core.Features.Students.Query.Models;
-using SchoolProject.Data.Entities;
+using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Router;
 
 namespace SchoolProject.API.Controllers
@@ -17,6 +17,13 @@ namespace SchoolProject.API.Controllers
         {
             var response = await Mediator.Send(new GetStudentListQuery());
             return NewResult(response);
+        }
+        [HttpGet]
+        [Route(Router.Student.Paginate)]
+        public async Task<IActionResult> Paginated([FromQuery] GetStudentPaginatedQuery studentPaginatedQuery)
+        {
+            var response = await Mediator.Send(studentPaginatedQuery);
+            return Ok(response);
         }
         [HttpGet]
         [Route(Router.Student.GetById)]
@@ -40,5 +47,13 @@ namespace SchoolProject.API.Controllers
             var response = await Mediator.Send(student);
             return NewResult(response);
         }
+        [HttpDelete]
+        [Route(Router.Student.Delete)]
+        public async Task<IActionResult> DeleteAsync([FromForm] int id)
+        {
+            var response = await Mediator.Send(new DeleteStudentCommand (id));
+            return NewResult(response);
+        }
+
     }
 }
