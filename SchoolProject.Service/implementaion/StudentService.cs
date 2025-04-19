@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Localization;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Enums;
 using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Service.implementaion
 {
-    public class StudentService(IStudentRepository studentRepository) : IStudentService
+    public class StudentService(IStudentRepository studentRepository  ) : IStudentService
     {
         private readonly IStudentRepository _studentRepository = studentRepository;
 
@@ -50,12 +53,23 @@ namespace SchoolProject.Service.implementaion
         }
         public async Task<string> EditAsync(Student _student)
         {
-            if (_student == null)
+            var trans = _studentRepository.BeginTransaction();
+            try
             {
+                if (_student == null)
+                {
+                    return "Error To update";
+                }
+                await _studentRepository.UpdateAsync(_student);
+                trans.Commit();
+                return "success";
+            }
+            catch
+            {
+                trans.Rollback();
                 return "Error To update";
             }
-            await _studentRepository.UpdateAsync(_student);
-            return "success";
+
         }
         public async Task<string> DeleteAsync(Student _student)
         {
@@ -103,16 +117,28 @@ namespace SchoolProject.Service.implementaion
                 .AsQueryable();
         }
 
-        public IQueryable<Student> FilterQueryPaginate(string search)
+        public IQueryable<Student> FilterQueryPaginate(StudentOrderingEnum orderingEnum, string search)
         {
-            //var queryable = _studentRepository.GetTableNoTracking()
-            //    .Include(x => x.Department)
-            //    .AsQueryable();
-            // Fixing the issue by replacing 'Contains' with a valid condition
-             return GetStudentsQuerable()
-                .Where(x => x.Name.Contains(search)||x.Address.Contains(search)||x.Department.DName.Contains(search)); // Replace "someValue" with the actual value to filter by
+            var queryable = GetStudentsQuerable();
 
-            
+            // Fixing the issue by replacing 'Contains' with a valid condition
+            if (search!=null)
+            {
+                return GetStudentsQuerable()
+                .Where(x => x.Name.Contains(search) || x.Address.Contains(search) || x.Department.DName.Contains(search)); // Replace "someValue" with the actual value to filter by
+            }
+            queryable = orderingEnum switch
+            {
+                StudentOrderingEnum.Name => queryable.OrderBy(x => x.Name),
+                StudentOrderingEnum.Address => queryable.OrderBy(x => x.Address),
+                StudentOrderingEnum.DepartmentName => queryable.OrderBy(x => x.Department.DName),
+                _ => queryable.OrderBy(x => x.StudID)
+            };
+
+            return queryable;
+
+
+
         }
     }
 }

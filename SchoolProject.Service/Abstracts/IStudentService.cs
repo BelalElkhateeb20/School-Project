@@ -1,4 +1,5 @@
 ﻿using SchoolProject.Data.Entities;
+using SchoolProject.Data.Enums;
 
 namespace SchoolProject.Service.Abstracts
 {
@@ -13,7 +14,7 @@ namespace SchoolProject.Service.Abstracts
         public Task<bool> IsNameExistAsync(string name);
         public Task<bool> IsNameExistExludeSelfAsync(string name,int id);
         public IQueryable<Student> GetStudentsQuerable();
-        public IQueryable<Student> FilterQueryPaginate( string search);
+        public IQueryable<Student> FilterQueryPaginate(StudentOrderingEnum orderingEnum,  string search);
 
 
 

@@ -21,7 +21,7 @@ namespace SchoolProject.infraStructure.Repositories
                 .FirstOrDefaultAsync();
             return student;
         }
-
+        
         public async Task<Student> GetStudentByIdWithIncludeAsync(int id)
         {
             var student = await GetTableNoTracking()

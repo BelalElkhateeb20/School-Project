@@ -9,6 +9,7 @@ namespace SchoolProject.Core.Mapping.Students
         {
             CreateMap<EditStudentCommand, Student>()
                 .ForPath(dest => dest.Department.DID, opt => opt.MapFrom(scr => scr.DepartmentId))
+                .ForPath(dest => dest.Department.DName,opt=>opt.Ignore())
                 .ForMember(dest => dest.StudID, opt => opt.Ignore())
                 .ForMember(dest => dest.Phone, opt => opt.MapFrom(scr => scr.phone));
 
