@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolProject.Data.Commons;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace SchoolProject.Data.Entities
 {
     [Table(name: "departments", Schema ="Dep")]
-    public class Department
+    public class Department: GeneralLocalizableEntity
     {
         public Department()
         {
@@ -16,7 +17,9 @@ namespace SchoolProject.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DID { get; set; }
         [StringLength(500)]
-        public string DName { get; set; }
+        public string DNameEN { get; set; }
+        [StringLength(500)]
+        public string DNameAR { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<DepartmentSubject> DepartmentSubjects { get; set; }
     }

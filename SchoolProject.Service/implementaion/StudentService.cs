@@ -35,7 +35,7 @@ namespace SchoolProject.Service.implementaion
             var trans =_studentRepository.BeginTransaction();
             try
             {
-                var student = _studentRepository.GetTableNoTracking().Where(x => x.Name == _student.Name).FirstOrDefault();
+                var student = _studentRepository.GetTableNoTracking().Where(x => x.NameEN == _student.NameEN).FirstOrDefault();
                 if (student == null)
                 {
                     await _studentRepository.AddAsync(_student);
@@ -92,7 +92,7 @@ namespace SchoolProject.Service.implementaion
         }
         public async Task<bool> IsNameExistAsync(string name)
         {
-            var student =await _studentRepository.GetTableNoTracking().Where(x => x.Name == name).FirstOrDefaultAsync();
+            var student =await _studentRepository.GetTableNoTracking().Where(x => x.NameEN == name).FirstOrDefaultAsync();
             if (student == null)
             {
                 return false;
@@ -102,7 +102,7 @@ namespace SchoolProject.Service.implementaion
 
         public async Task<bool> IsNameExistExludeSelfAsync(string name, int id)
         {
-            var student = await _studentRepository.GetTableNoTracking().Where(x => x.Name == name&&x.StudID==id).FirstOrDefaultAsync();
+            var student = await _studentRepository.GetTableNoTracking().Where(x => x.NameEN == name&&x.StudID==id).FirstOrDefaultAsync();
             if (student == null)
             {
                 return false;
@@ -125,13 +125,13 @@ namespace SchoolProject.Service.implementaion
             if (search!=null)
             {
                 return GetStudentsQuerable()
-                .Where(x => x.Name.Contains(search) || x.Address.Contains(search) || x.Department.DName.Contains(search)); // Replace "someValue" with the actual value to filter by
+                .Where(x => x.NameEN.Contains(search) || x.Address.Contains(search) || x.Department.DNameEN.Contains(search)); // Replace "someValue" with the actual value to filter by
             }
             queryable = orderingEnum switch
             {
-                StudentOrderingEnum.Name => queryable.OrderBy(x => x.Name),
+                StudentOrderingEnum.Name => queryable.OrderBy(x => x.NameEN),
                 StudentOrderingEnum.Address => queryable.OrderBy(x => x.Address),
-                StudentOrderingEnum.DepartmentName => queryable.OrderBy(x => x.Department.DName),
+                StudentOrderingEnum.DepartmentName => queryable.OrderBy(x => x.Department.DNameEN),
                 _ => queryable.OrderBy(x => x.StudID)
             };
 
