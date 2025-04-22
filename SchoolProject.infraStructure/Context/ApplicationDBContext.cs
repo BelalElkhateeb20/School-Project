@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Configurations;
+using SchoolProject.infraStructure.Configurations;
 
 namespace SchoolProject.infraStructure.Data
 {
@@ -13,6 +15,10 @@ namespace SchoolProject.infraStructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            #region Database Seeding
+            modelBuilder.ApplyConfiguration(new DepartmentSeedingConfig());
+            modelBuilder.ApplyConfiguration(new StudentSeedingConfig());
+            #endregion
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

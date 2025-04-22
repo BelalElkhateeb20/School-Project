@@ -12,8 +12,8 @@ using SchoolProject.infraStructure.Data;
 namespace SchoolProject.infraStructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250316210941_AddAllTables")]
-    partial class AddAllTables
+    [Migration("20250422192258_AddDepartmentTable")]
+    partial class AddDepartmentTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,12 @@ namespace SchoolProject.infraStructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DID"));
 
-                    b.Property<string>("DName")
+                    b.Property<string>("DNameAR")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("DNameEN")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -41,6 +46,98 @@ namespace SchoolProject.infraStructure.Migrations
                     b.HasKey("DID");
 
                     b.ToTable("departments", "Dep");
+
+                    b.HasData(
+                        new
+                        {
+                            DID = 1,
+                            DNameAR = "الهندسة",
+                            DNameEN = "Engineering"
+                        },
+                        new
+                        {
+                            DID = 2,
+                            DNameAR = "الطب",
+                            DNameEN = "Medicine"
+                        },
+                        new
+                        {
+                            DID = 3,
+                            DNameAR = "التجارة",
+                            DNameEN = "Commerce"
+                        },
+                        new
+                        {
+                            DID = 4,
+                            DNameAR = "الحقوق",
+                            DNameEN = "Law"
+                        },
+                        new
+                        {
+                            DID = 5,
+                            DNameAR = "الصيدلة",
+                            DNameEN = "Pharmacy"
+                        },
+                        new
+                        {
+                            DID = 6,
+                            DNameAR = "طب الأسنان",
+                            DNameEN = "Dentistry"
+                        },
+                        new
+                        {
+                            DID = 7,
+                            DNameAR = "علوم الحاسب",
+                            DNameEN = "Computer Science"
+                        },
+                        new
+                        {
+                            DID = 8,
+                            DNameAR = "الآداب",
+                            DNameEN = "Arts"
+                        },
+                        new
+                        {
+                            DID = 9,
+                            DNameAR = "الزراعة",
+                            DNameEN = "Agriculture"
+                        },
+                        new
+                        {
+                            DID = 10,
+                            DNameAR = "التربية",
+                            DNameEN = "Education"
+                        },
+                        new
+                        {
+                            DID = 11,
+                            DNameAR = "التمريض",
+                            DNameEN = "Nursing"
+                        },
+                        new
+                        {
+                            DID = 12,
+                            DNameAR = "العلوم",
+                            DNameEN = "Science"
+                        },
+                        new
+                        {
+                            DID = 13,
+                            DNameAR = "الطب البيطري",
+                            DNameEN = "Veterinary Medicine"
+                        },
+                        new
+                        {
+                            DID = 14,
+                            DNameAR = "التربية الرياضية",
+                            DNameEN = "Physical Education"
+                        },
+                        new
+                        {
+                            DID = 15,
+                            DNameAR = "السياحة والفنادق",
+                            DNameEN = "Tourism and Hotels"
+                        });
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.DepartmentSubject", b =>
@@ -85,7 +182,12 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Property<int?>("DepartmentID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameAR")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("NameEN")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -136,7 +238,12 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Property<DateTime>("Period")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("SubjectName")
+                    b.Property<string>("SubjectNameAR")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("SubjectNameEN")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");

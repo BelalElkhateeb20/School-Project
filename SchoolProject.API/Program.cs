@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Localization;
+﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
 using SchoolProject.Core.MiddleWare;
+//using SchoolProject.Data.Configurations;
 using SchoolProject.infraStructure;
 using SchoolProject.infraStructure.Data;
 using SchoolProject.Service;
@@ -71,6 +72,7 @@ namespace SchoolProject.API
             app.MapControllers();
 
             app.Run();
+
         }
     }
 }
