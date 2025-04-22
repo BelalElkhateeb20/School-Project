@@ -26,7 +26,8 @@ namespace SchoolProject.Core.Features.Students.Command.Handler
                 return Created<string>();
             }
             return BadRequest<string>();
-        }
+        } 
+
 
         public async Task<Response<string>> Handle(EditStudentCommand request, CancellationToken cancellationToken)
         {
