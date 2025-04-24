@@ -35,7 +35,7 @@ namespace SchoolProject.API
             builder.Services.AddControllersWithViews();
             builder.Services.AddLocalization(opt =>
             {
-                
+
                 opt.ResourcesPath = "";
             });
 
@@ -46,7 +46,9 @@ namespace SchoolProject.API
                         new CultureInfo("en-US"),
                         new CultureInfo("de-DE"),
                         new CultureInfo("fr-FR"),
-                        new CultureInfo("ar-EG")
+                        new CultureInfo("ar-EG"),
+                        new CultureInfo("ar"),
+                        new CultureInfo("en"),
                 ];
 
                 options.DefaultRequestCulture = new RequestCulture("en-US",uiCulture: "en-US");
@@ -60,15 +62,14 @@ namespace SchoolProject.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
             #region Localization Middleware
             var locoptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locoptions.Value);
             #endregion
             app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.MapControllers();
 
             app.Run();

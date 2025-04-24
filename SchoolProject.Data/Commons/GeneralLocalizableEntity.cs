@@ -2,7 +2,7 @@
 
 namespace SchoolProject.Data.Commons
 {
-    public  class GeneralLocalizableEntity
+    public class GeneralLocalizableEntity
     {
         public string Localize(string textAr, string textEN)
         {

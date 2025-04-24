@@ -7,7 +7,7 @@
 namespace SchoolProject.infraStructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDepartmentTable : Migration
+    public partial class SeedingDepartmentData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,24 +15,24 @@ namespace SchoolProject.infraStructure.Migrations
             migrationBuilder.InsertData(
                 schema: "Dep",
                 table: "departments",
-                columns: new[] { "DID", "DNameAR", "DNameEN" },
+                columns: new[] { "DID", "DNameAR", "DNameEN", "InsManager" },
                 values: new object[,]
                 {
-                    { 1, "الهندسة", "Engineering" },
-                    { 2, "الطب", "Medicine" },
-                    { 3, "التجارة", "Commerce" },
-                    { 4, "الحقوق", "Law" },
-                    { 5, "الصيدلة", "Pharmacy" },
-                    { 6, "طب الأسنان", "Dentistry" },
-                    { 7, "علوم الحاسب", "Computer Science" },
-                    { 8, "الآداب", "Arts" },
-                    { 9, "الزراعة", "Agriculture" },
-                    { 10, "التربية", "Education" },
-                    { 11, "التمريض", "Nursing" },
-                    { 12, "العلوم", "Science" },
-                    { 13, "الطب البيطري", "Veterinary Medicine" },
-                    { 14, "التربية الرياضية", "Physical Education" },
-                    { 15, "السياحة والفنادق", "Tourism and Hotels" }
+                    { 1, "الهندسة", "Engineering", null },
+                    { 2, "الطب", "Medicine", null },
+                    { 3, "التجارة", "Commerce", null },
+                    { 4, "الحقوق", "Law", null },
+                    { 5, "الصيدلة", "Pharmacy", null },
+                    { 6, "طب الأسنان", "Dentistry", null },
+                    { 7, "علوم الحاسب", "Computer Science", null },
+                    { 8, "الآداب", "Arts", null },
+                    { 9, "الزراعة", "Agriculture", null },
+                    { 10, "التربية", "Education", null },
+                    { 11, "التمريض", "Nursing", null },
+                    { 12, "العلوم", "Science", null },
+                    { 13, "الطب البيطري", "Veterinary Medicine", null },
+                    { 14, "التربية الرياضية", "Physical Education", null },
+                    { 15, "السياحة والفنادق", "Tourism and Hotels", null }
                 });
         }
 

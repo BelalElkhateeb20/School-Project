@@ -7,19 +7,27 @@ namespace SchoolProject.Data.Entities
 
     public class Student: GeneralLocalizableEntity
     {
+        public Student()
+        {
+            StudentSubjects = new HashSet<StudentSubjects>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StudID { get; set; }
         [StringLength(200)]
-        public string NameEN { get; set; }
+        public string? NameEN { get; set; } 
         [StringLength(200)]
-        public string NameAR { get; set; }
+        public string? NameAR { get; set; }
         [StringLength(500)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
         [StringLength(500)]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
         [ForeignKey("DepartmentID")]
         public int? DepartmentID { get; set; } //can be Null
-        public virtual Department Department { get; set; }
+        public virtual Department? Department { get; set; }
+
+        [InverseProperty("Student")]
+
+        public ICollection <StudentSubjects> StudentSubjects { get; set; }
     }
 }

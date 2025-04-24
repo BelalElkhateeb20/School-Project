@@ -27,8 +27,6 @@ namespace SchoolProject.Core.Features.Students.Command.Handler
             }
             return BadRequest<string>();
         } 
-
-
         public async Task<Response<string>> Handle(EditStudentCommand request, CancellationToken cancellationToken)
         {
             var student = await _studentService.GetByIdAsync(request.Id);

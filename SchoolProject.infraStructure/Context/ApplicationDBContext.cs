@@ -15,10 +15,31 @@ namespace SchoolProject.infraStructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             #region Database Seeding
             modelBuilder.ApplyConfiguration(new DepartmentSeedingConfig());
             modelBuilder.ApplyConfiguration(new StudentSeedingConfig());
             #endregion
+
+            modelBuilder.Entity<StudentSubjects>()
+                .HasKey(x => new { x.SubID, x.StudID });
+            modelBuilder.Entity<Ins_Subject>()
+                .HasKey(x => new { x.SubId, x.InsId });
+            modelBuilder.Entity<DepartmentSubject>()
+                .HasKey(x => new { x.SubID, x.DepartmentID });
+            modelBuilder.Entity<Instructor>()
+                .HasOne(x => x.Supervisor)
+                .WithMany(x => x.Instructors)
+                .HasForeignKey(x => x.SupervisorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Department>()
+                .HasOne(x => x.Instructor)
+                .WithOne(x => x.DepartmentManager)
+                .HasForeignKey<Department>(x => x.InsManager)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
