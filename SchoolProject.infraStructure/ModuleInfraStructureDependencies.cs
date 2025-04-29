@@ -10,6 +10,7 @@ namespace SchoolProject.infraStructure
         public static IServiceCollection AddInfraStructureDependencies(this IServiceCollection services)
         {
              services.AddTransient<IStudentRepository, StudentRepository>();
+             services.AddTransient<IDepartmentRepository, DepartmentRepository>();
             services.AddTransient(typeof (IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             return services;
         }

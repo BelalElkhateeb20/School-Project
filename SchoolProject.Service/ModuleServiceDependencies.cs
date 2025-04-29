@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SchoolProject.infraStructure.Repositories;
 using SchoolProject.Service.Abstracts;
 using SchoolProject.Service.implementaion;
 
@@ -8,7 +9,9 @@ namespace SchoolProject.Service
     {
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
         {
-            return services.AddTransient<IStudentService, StudentService>();
+             services.AddTransient<IStudentService, StudentService>();
+             services.AddTransient<IDepartmentService, DepartmentService>();
+            return services;
         }
     }
 }

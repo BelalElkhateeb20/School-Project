@@ -2,7 +2,6 @@
 using SchoolProject.API.Base;
 using SchoolProject.Core.Features.Students.Command.Models;
 using SchoolProject.Core.Features.Students.Query.Models;
-using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Router;
 
 namespace SchoolProject.API.Controllers

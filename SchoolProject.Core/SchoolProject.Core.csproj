@@ -21,4 +21,10 @@
     <PackageReference Include="SendGrid" Version="9.29.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Departments\Command\" />
+    <Folder Include="Features\Departments\Query\Validators\" />
+    <Folder Include="Mapping\Departments\CommandMapping\" />
+  </ItemGroup>
+
 </Project>
