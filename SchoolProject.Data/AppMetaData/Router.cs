@@ -18,5 +18,14 @@
             public const string Delete = perfix + delete;//Api/V1/Student/delete
             public const string Paginate = perfix + paginate;//Api/V1/Student/Paginate
         }
+        public static class Department
+        {
+            public const string perfix = Rule + "/Department";//API/V1/Department
+            public const string GetAll = perfix + "/List";//Api/V1/Department/List
+            public const string GetById = perfix + singleroute;//Api/V1/Department/{id}
+            public const string Update = perfix + update;//Api/V1/Department/update
+            public const string Delete = perfix + delete;//Api/V1/Department/delete
+            public const string Paginate = perfix + paginate;//Api/V1/Department/Paginate
+        }
     }
 }

@@ -1,21 +1,20 @@
-﻿using MediatR;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.API.Base;
 using SchoolProject.Core.Features.Departments.Query.Models;
+using SchoolProject.Data.Router;
 
 namespace SchoolProject.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController() : AppController
+    public class DepartmentController : AppController
     {
-
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetDepartmentById(int id)
+        [Route(Router.Department.GetById)]
+        public async Task<IActionResult> GetDepartmentById([FromRoute]int id)
         {
             var response = await Mediator.Send(new GetDepartmentByIdQuery(id));
             return NewResult(response);
-        }   
+        }
     }
 }
