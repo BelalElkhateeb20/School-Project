@@ -1,6 +1,6 @@
 ﻿using SchoolProject.Core.Features.Departments.Query.DTOs;
 using SchoolProject.Core.Features.Departments.Query.ResponseDTO;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 
 namespace SchoolProject.Core.Mapping.Departments
 {

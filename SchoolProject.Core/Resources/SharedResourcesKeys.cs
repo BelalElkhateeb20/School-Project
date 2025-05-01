@@ -56,5 +56,7 @@ namespace SchoolProject.Core.Resources
         public const string InvaildCode = "InvaildCode";
         public const string NoImage = "NoImage";
         public const string FailedToUploadImage = "FailedToUploadImage";
+        public const string Mustnotbenull = "Must not be null";
+        public const string ExceedingTheMaxLength = "Exceeding TheMax Length";
     }
 }

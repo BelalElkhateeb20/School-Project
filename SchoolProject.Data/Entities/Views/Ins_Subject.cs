@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 
 
-namespace SchoolProject.Data.Entities
+namespace SchoolProject.Data.Entities.Views
 {
     public class Ins_Subject
     {

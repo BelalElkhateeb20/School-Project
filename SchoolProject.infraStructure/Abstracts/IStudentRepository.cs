@@ -1,4 +1,4 @@
-﻿using SchoolProject.Data.Entities;
+﻿using SchoolProject.Data.Entities.Views;
 using SchoolProject.infraStructure.InfrastructureBases;
 namespace SchoolProject.infraStructure.Abstracts
 {

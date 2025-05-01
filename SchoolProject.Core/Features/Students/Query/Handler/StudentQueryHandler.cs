@@ -7,7 +7,7 @@ using SchoolProject.Core.Features.Students.Query.Resopnse;
 using SchoolProject.Core.Features.Students.Query.ResponseDTO;
 using SchoolProject.Core.Resources;
 using SchoolProject.Core.Wrappers;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 using SchoolProject.Service.Abstracts;
 using System.Linq.Expressions;
 //Mediator

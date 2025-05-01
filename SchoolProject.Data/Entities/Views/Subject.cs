@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 
-namespace SchoolProject.Data.Entities
+namespace SchoolProject.Data.Entities.Views
 {
     [Table(name: "subjects",Schema = "Sub")]
     public class Subject: GeneralLocalizableEntity

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace SchoolProject.Data.Entities
+namespace SchoolProject.Data.Entities.Views
 {
     public class Instructor : GeneralLocalizableEntity
     {

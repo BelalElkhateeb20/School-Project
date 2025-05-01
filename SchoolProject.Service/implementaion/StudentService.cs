@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Localization;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 using SchoolProject.Data.Enums;
 using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Service.implementaion
 {
-    public class StudentService(IStudentRepository studentRepository  ) : IStudentService
+    public class StudentService(IStudentRepository studentRepository) : IStudentService
     {
         private readonly IStudentRepository _studentRepository = studentRepository;
 
@@ -136,9 +136,11 @@ namespace SchoolProject.Service.implementaion
             };
 
             return queryable;
+        }
 
-
-
+        public Task<bool> DepartmebtNameISExistAsync(int id)
+        {
+           return _studentRepository.GetTableNoTracking().AnyAsync(x=>x.DepartmentID.Equals(id));
         }
     }
 }

@@ -11,20 +11,20 @@ using SchoolProject.infraStructure.Data;
 namespace SchoolProject.infraStructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250429115616_AddInstractorSeedingData")]
-    partial class AddInstractorSeedingData
+    [Migration("20250501163043_AddTables")]
+    partial class AddTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Department", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Department", b =>
                 {
                     b.Property<int>("DID")
                         .ValueGeneratedOnAdd()
@@ -144,7 +144,7 @@ namespace SchoolProject.infraStructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.DepartmentSubject", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.DepartmentSubject", b =>
                 {
                     b.Property<int>("SubID")
                         .HasColumnType("int");
@@ -164,7 +164,7 @@ namespace SchoolProject.infraStructure.Migrations
                     b.ToTable("departmentSubjects", "DepSub");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Ins_Subject", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Ins_Subject", b =>
                 {
                     b.Property<int>("SubId")
                         .HasColumnType("int");
@@ -179,7 +179,7 @@ namespace SchoolProject.infraStructure.Migrations
                     b.ToTable("Ins_Subject");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Instructor", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Instructor", b =>
                 {
                     b.Property<int>("InsId")
                         .ValueGeneratedOnAdd()
@@ -327,7 +327,7 @@ namespace SchoolProject.infraStructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Student", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Student", b =>
                 {
                     b.Property<int>("StudID")
                         .ValueGeneratedOnAdd()
@@ -626,7 +626,7 @@ namespace SchoolProject.infraStructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.StudentSubjects", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.StudentSubjects", b =>
                 {
                     b.Property<int>("SubID")
                         .HasColumnType("int");
@@ -647,7 +647,7 @@ namespace SchoolProject.infraStructure.Migrations
                     b.ToTable("studentSubjects", "StuSub");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Subject", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Subject", b =>
                 {
                     b.Property<int>("SubID")
                         .ValueGeneratedOnAdd()
@@ -671,25 +671,25 @@ namespace SchoolProject.infraStructure.Migrations
                     b.ToTable("subjects", "Sub");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Department", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Department", b =>
                 {
-                    b.HasOne("SchoolProject.Data.Entities.Instructor", "Instructor")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Instructor", "Instructor")
                         .WithOne("DepartmentManager")
-                        .HasForeignKey("SchoolProject.Data.Entities.Department", "InsManager")
+                        .HasForeignKey("SchoolProject.Data.Entities.Views.Department", "InsManager")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Instructor");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.DepartmentSubject", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.DepartmentSubject", b =>
                 {
-                    b.HasOne("SchoolProject.Data.Entities.Department", "Department")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Department", "Department")
                         .WithMany("DepartmentSubjects")
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SchoolProject.Data.Entities.Subject", "Subject")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Subject", "Subject")
                         .WithMany("DepartmetsSubjects")
                         .HasForeignKey("SubjectSubID");
 
@@ -698,15 +698,15 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Ins_Subject", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Ins_Subject", b =>
                 {
-                    b.HasOne("SchoolProject.Data.Entities.Instructor", "Instructor")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Instructor", "Instructor")
                         .WithMany("Ins_Subjects")
                         .HasForeignKey("InsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SchoolProject.Data.Entities.Subject", "Subject")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Subject", "Subject")
                         .WithMany("Ins_Subjects")
                         .HasForeignKey("SubId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -717,15 +717,15 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Instructor", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Instructor", b =>
                 {
-                    b.HasOne("SchoolProject.Data.Entities.Department", "Department")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Department", "Department")
                         .WithMany("Instructors")
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SchoolProject.Data.Entities.Instructor", "Supervisor")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Instructor", "Supervisor")
                         .WithMany("Instructors")
                         .HasForeignKey("SupervisorId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -735,24 +735,24 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Navigation("Supervisor");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Student", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Student", b =>
                 {
-                    b.HasOne("SchoolProject.Data.Entities.Department", "Department")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Department", "Department")
                         .WithMany("Students")
                         .HasForeignKey("DepartmentID");
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.StudentSubjects", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.StudentSubjects", b =>
                 {
-                    b.HasOne("SchoolProject.Data.Entities.Student", "Student")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Student", "Student")
                         .WithMany("StudentSubjects")
                         .HasForeignKey("StudID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SchoolProject.Data.Entities.Subject", "Subject")
+                    b.HasOne("SchoolProject.Data.Entities.Views.Subject", "Subject")
                         .WithMany("StudentsSubjects")
                         .HasForeignKey("SubID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -763,7 +763,7 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Department", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Department", b =>
                 {
                     b.Navigation("DepartmentSubjects");
 
@@ -772,7 +772,7 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Navigation("Students");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Instructor", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Instructor", b =>
                 {
                     b.Navigation("DepartmentManager");
 
@@ -781,12 +781,12 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Navigation("Instructors");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Student", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Student", b =>
                 {
                     b.Navigation("StudentSubjects");
                 });
 
-            modelBuilder.Entity("SchoolProject.Data.Entities.Subject", b =>
+            modelBuilder.Entity("SchoolProject.Data.Entities.Views.Subject", b =>
                 {
                     b.Navigation("DepartmetsSubjects");
 

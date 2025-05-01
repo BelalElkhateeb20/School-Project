@@ -156,6 +156,9 @@
   <data name="ErrorWhenConfirmEmail" xml:space="preserve">
     <value>Error Occur When Confirm Email</value>
   </data>
+  <data name="ExceedingTheMaxLength" xml:space="preserve">
+    <value>ExceedingTheMaxLength</value>
+  </data>
   <data name="FaildToAddUser" xml:space="preserve">
     <value>Failed To Add USer.</value>
   </data>
@@ -195,8 +198,8 @@
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="Must not be null" xml:space="preserve">
+    <value>Must not be null</value>
   </data>
   <data name="NoImage" xml:space="preserve">
     <value>Please Select Image</value>

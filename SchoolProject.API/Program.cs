@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
 using SchoolProject.Core.MiddleWare;
-//using SchoolProject.Data.Configurations;
 using SchoolProject.infraStructure;
 using SchoolProject.infraStructure.Data;
 using SchoolProject.Service;
@@ -28,7 +27,9 @@ namespace SchoolProject.API
             #region Dependency Injection  
             builder.Services.AddInfraStructureDependencies()
                 .AddServiceDependencies()
-                .AddCoreDependencies();
+                .AddCoreDependencies()
+                .AddServiceRegistration();
+
             #endregion
 
             #region Localization

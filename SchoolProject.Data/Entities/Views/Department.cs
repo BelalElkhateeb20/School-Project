@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace SchoolProject.Data.Entities
+namespace SchoolProject.Data.Entities.Views
 {
     [Table(name: "departments", Schema ="Dep")]
     public class Department: GeneralLocalizableEntity
@@ -23,7 +23,7 @@ namespace SchoolProject.Data.Entities
         public string? DNameAR { get; set; }
         public int? InsManager { get; set; }
 
-        [InverseProperty(("Department"))]
+        [InverseProperty("Department")]
         public virtual ICollection<Student> Students { get; set; }
         [InverseProperty("Department")]
 

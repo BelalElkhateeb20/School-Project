@@ -156,6 +156,9 @@
   <data name="ErrorWhenConfirmEmail" xml:space="preserve">
     <value>حدث خطأ اثناء تأكيد الايميل</value>
   </data>
+  <data name="ExceedingTheMaxLength" xml:space="preserve">
+    <value>تجاوز الطول المحدود</value>
+  </data>
   <data name="FaildToAddUser" xml:space="preserve">
     <value>حدث خطأ اثناء اضافة المستخدم</value>
   </data>
@@ -195,8 +198,8 @@
   <data name="Message" xml:space="preserve">
     <value>الرسالة</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>الاسم</value>
+  <data name="Must not be null" xml:space="preserve">
+    <value>لا يجب ان يكون نل</value>
   </data>
   <data name="NoImage" xml:space="preserve">
     <value>من فضلك قم بإختيار صورة</value>

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SchoolProject.Core.Features.Students.Query.ResponseDTO;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 
 namespace SchoolProject.Core.Mapping.Students
 {

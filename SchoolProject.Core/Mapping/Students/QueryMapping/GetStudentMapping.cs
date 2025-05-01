@@ -1,5 +1,5 @@
 ﻿using SchoolProject.Core.Features.Students.Query.Resopnse;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 namespace SchoolProject.Core.Mapping.Students
 {
     public partial class StudentProfile

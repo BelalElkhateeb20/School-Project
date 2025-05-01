@@ -1,12 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SchoolProject.Data.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Configurations;
+using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Entities.Views;
 using SchoolProject.infraStructure.Configurations;
 using SchoolProject.infraStructure.DataSeedingConfigurations;
 
+
+
 namespace SchoolProject.infraStructure.Data
 {
-    public class ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : DbContext(options)
+    public class ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>(options)
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -16,6 +21,7 @@ namespace SchoolProject.infraStructure.Data
             modelBuilder.ApplyConfiguration(new DepartmentSeedingConfig());
             modelBuilder.ApplyConfiguration(new StudentSeedingConfig());
             modelBuilder.ApplyConfiguration(new InstractorSeedingConfig());
+            modelBuilder.ApplyConfiguration(new SubjectSeedingConfig());
             #endregion
 
             #region Relationships
@@ -54,5 +60,8 @@ namespace SchoolProject.infraStructure.Data
         public DbSet<Subject> subjects { get; set; }
         public DbSet<StudentSubjects> studentSubjects { get; set; }
         public DbSet<DepartmentSubject> departmentSubjects { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
     }
 }

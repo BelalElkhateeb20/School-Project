@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.infraStructure.Data;
 using SchoolProject.infraStructure.InfrastructureBases;

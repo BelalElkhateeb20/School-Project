@@ -4,7 +4,7 @@ using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Basies;
 using SchoolProject.Core.Features.Students.Command.Models;
 using SchoolProject.Core.Resources;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Students.Command.Handler

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
-namespace SchoolProject.Data.Entities
+
+namespace SchoolProject.Data.Entities.Views
 {
     [Table(name: "departmentSubjects", Schema = "DepSub")]
 
