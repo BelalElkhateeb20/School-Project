@@ -1,7 +1,4 @@
 ﻿
-
-using System.Net;
-
 namespace SchoolProject.Core.Features.Students.Query.ResponseDTO
 {
     public class GetStudentPaginatedResponse(int studID, string name, string address, string departmentName)

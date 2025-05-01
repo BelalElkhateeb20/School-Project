@@ -16,15 +16,17 @@ namespace SchoolProject.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
             builder.Services.AddControllers();
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            #region Database Configuration
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DBContext"));
             });
+            #endregion
+
             #region Dependency Injection  
             builder.Services.AddInfraStructureDependencies()
                 .AddServiceDependencies()
@@ -51,11 +53,27 @@ namespace SchoolProject.API
                         new CultureInfo("en"),
                 ];
 
-                options.DefaultRequestCulture = new RequestCulture("en-US",uiCulture: "en-US");
+                options.DefaultRequestCulture = new RequestCulture("en-US", uiCulture: "en-US");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
             #endregion
+
+            #region CORS
+            var CORPolicy = "AllowSpecificOrigins";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: CORPolicy,
+                                  policy =>
+                                  {
+                                      policy.AllowAnyHeader()
+                                            .AllowAnyMethod()
+                                            .AllowAnyOrigin();
+
+                                  });
+            });
+            #endregion
+
             var app = builder.Build();
             if (app.Environment.IsDevelopment())
             {
@@ -67,7 +85,10 @@ namespace SchoolProject.API
             var locoptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locoptions.Value);
             #endregion
+
             app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            app.UseCors("AllowSpecificOrigins");
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
