@@ -9,11 +9,10 @@ namespace SchoolProject.infraStructure
         public static IServiceCollection AddServiceRegistration(this IServiceCollection services)
         {
             
-            services.AddIdentity<User, IdentityRole>(
+            services.AddIdentity<User, Role>(
                 options =>
                 {
                     options.Password.RequireDigit = true;
-                    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                     options.User.RequireUniqueEmail = true;
                     options.SignIn.RequireConfirmedAccount = true;
                 }).AddEntityFrameworkStores<ApplicationDBContext>()

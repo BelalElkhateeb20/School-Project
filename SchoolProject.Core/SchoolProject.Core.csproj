@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Departments\Command\**" />
+    <Compile Remove="Features\Departments\Query\Validators\**" />
+    <EmbeddedResource Remove="Features\Departments\Command\**" />
+    <EmbeddedResource Remove="Features\Departments\Query\Validators\**" />
+    <None Remove="Features\Departments\Command\**" />
+    <None Remove="Features\Departments\Query\Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SchoolProject.Data\SchoolProject.Data.csproj" />
     <ProjectReference Include="..\SchoolProject.Service\SchoolProject.Service.csproj" />
   </ItemGroup>
@@ -22,9 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Departments\Command\" />
-    <Folder Include="Features\Departments\Query\Validators\" />
-    <Folder Include="Mapping\Departments\CommandMapping\" />
+    <Folder Include="Features\User\Query\Handler\" />
+    <Folder Include="Features\User\Query\Models\" />
+    <Folder Include="Features\User\Query\Validator\" />
+    <Folder Include="Mapping\Users\CommandMapping\" />
   </ItemGroup>
 
 </Project>
