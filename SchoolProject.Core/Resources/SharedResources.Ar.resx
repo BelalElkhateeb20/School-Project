@@ -219,6 +219,9 @@
   <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
     <value>الباسورد والباسورد المؤكد يجب ان يكونوا متساويين</value>
   </data>
+  <data name="ProcessFailed" xml:space="preserve">
+    <value>العملية فاشله </value>
+  </data>
   <data name="RefreshTokenIsExpired" xml:space="preserve">
     <value>رمز التنشيط الذي تستخمه انتهت صلاحية</value>
   </data>

@@ -219,6 +219,9 @@
   <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
     <value>Password And Confirm Password Not Equals.</value>
   </data>
+  <data name="ProcessFailed" xml:space="preserve">
+    <value>Process Failed</value>
+  </data>
   <data name="RefreshTokenIsExpired" xml:space="preserve">
     <value>Refresh Token Is Expired</value>
   </data>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Basies;
+using SchoolProject.Core.Features.User.Commands.Models;
 using SchoolProject.Core.Features.Users.Commands.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Data.Entities.Identity;
@@ -12,7 +13,10 @@ using SchoolProject.infraStructure.Data;
 
 namespace SchoolProject.Core.Features.Users.Commands.Handler
 {
-    public class UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, UserManager<Data.Entities.Identity.User> userManager, ApplicationDBContext dBContext) : ResponseHandler(stringLocalizer), IRequestHandler<AddUserCommand, Response<string>>
+    public class UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, UserManager<Data.Entities.Identity.User> userManager, ApplicationDBContext dBContext) : ResponseHandler(stringLocalizer)
+        , IRequestHandler<AddUserCommand, Response<string>>
+        , IRequestHandler< UpdateUserCommand, Response<string>>,
+        IRequestHandler<DeleteUserCommand, Response<string>>
 
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer = stringLocalizer;
@@ -46,6 +50,53 @@ namespace SchoolProject.Core.Features.Users.Commands.Handler
             {
                 tran.Rollback();
                 return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FaildToAddUser]); ;
+            }
+        }
+
+        public async Task<Response<string>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            var trans = await _dBContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id.Equals(request.Id));
+                if (user ==null) return NotFound<string>();
+              
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    trans.Commit();
+                    var usermapping = _mapper.Map(request,user);
+                    return Updated<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
+                }
+                return Faild<string>(_stringLocalizer[SharedResourcesKeys.UpdateFailed]);
+            }
+            catch
+            {
+                trans.Rollback();
+                return Faild<string>(_stringLocalizer[SharedResourcesKeys.UpdateFailed]);
+            }
+        }
+
+        public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        {
+            var trans = await _dBContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id.Equals(request.Id));
+                if (user == null) return NotFound<string>();
+
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    trans.Commit();
+                    return Deleted <string>(_stringLocalizer[SharedResourcesKeys.Deleted]);
+                }
+                return Faild<string>(_stringLocalizer[SharedResourcesKeys.DeletedFailed]);
+            }
+            catch
+            {
+                trans.Rollback();
+                return Faild<string>(_stringLocalizer[SharedResourcesKeys.DeletedFailed]);
             }
         }
     }

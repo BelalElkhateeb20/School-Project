@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolProject.API.Base;
+using SchoolProject.Core.Features.User.Commands.Models;
 using SchoolProject.Core.Features.User.Query.Models;
 using SchoolProject.Core.Features.Users.Commands.Models;
 using SchoolProject.Data.Router;
@@ -32,6 +33,20 @@ namespace SchoolProject.API.Controllers
         public async Task<IActionResult> GetUserByIdAsync([FromRoute] int id )
         {
             var response = await Mediator.Send(new GetUserByIdQuery(id));
+            return NewResult(response);
+        }
+        [HttpPut]
+        [Route(Router.User.Update)]
+        public async Task<IActionResult> UpdateUserAsync([FromForm] UpdateUserCommand update)
+        {
+            var response = await Mediator.Send(update);
+            return NewResult(response);
+        } 
+        [HttpDelete]
+        [Route(Router.User.Delete)]
+        public async Task<IActionResult> DeleteUserAsync(int id)
+        {
+            var response = await Mediator.Send(new DeleteUserCommand(id));
             return NewResult(response);
         }
     }

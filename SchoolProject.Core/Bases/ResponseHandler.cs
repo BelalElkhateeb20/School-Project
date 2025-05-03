@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Resources;
+using System.Diagnostics;
 using System.Net;
 namespace SchoolProject.Core.Basies
 {
@@ -7,7 +8,7 @@ namespace SchoolProject.Core.Basies
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer = stringLocalizer;
 
-        public Response<T> Deleted<T>()
+        public Response<T> Deleted<T>(string Message = null)
         {
             return new Response<T>()
             {
@@ -16,7 +17,7 @@ namespace SchoolProject.Core.Basies
                 Message = _stringLocalizer[SharedResourcesKeys.Deleted]
             };
         }
-        public Response<T> Updated<T>()
+        public Response<T> Updated<T>(string Message = null)
         {
             return new Response<T>()
             {
@@ -75,6 +76,15 @@ namespace SchoolProject.Core.Basies
                 StatusCode = HttpStatusCode.NotFound,
                 Succeeded = false,
                 Message = message == null ? _stringLocalizer[SharedResourcesKeys.NotFound] : message
+            };
+        }
+        public Response<T> Faild<T>(string message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                Succeeded = false,
+                Message = message == null ? _stringLocalizer[SharedResourcesKeys.ProcessFailed] : message
             };
         }
 
