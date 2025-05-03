@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolProject.API.Base;
+using SchoolProject.Core.Features.User.Query.Models;
 using SchoolProject.Core.Features.Users.Commands.Models;
 using SchoolProject.Data.Router;
 
@@ -15,8 +16,24 @@ namespace SchoolProject.API.Controllers
         public async Task<IActionResult> AddUserAsync(  AddUserCommand addUser )
         {
             var response = await Mediator.Send(addUser);
+            return NewResult(response);
+        }
 
+        [HttpGet]
+        [Route(Router.User.Paginate)]
+        public async Task<IActionResult> GetUserAsync([FromQuery]GetUserPagination getUserPagination )
+        {
+            var response = await Mediator.Send(getUserPagination);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route(Router.User.GetById)]
+        public async Task<IActionResult> GetUserByIdAsync([FromRoute] int id )
+        {
+            var response = await Mediator.Send(new GetUserByIdQuery(id));
             return NewResult(response);
         }
     }
+
 }

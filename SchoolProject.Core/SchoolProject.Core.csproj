@@ -30,11 +30,4 @@
     <PackageReference Include="SendGrid" Version="9.29.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\User\Query\Handler\" />
-    <Folder Include="Features\User\Query\Models\" />
-    <Folder Include="Features\User\Query\Validator\" />
-    <Folder Include="Mapping\Users\CommandMapping\" />
-  </ItemGroup>
-
 </Project>

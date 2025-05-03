@@ -12,12 +12,12 @@ using SchoolProject.infraStructure.Data;
 
 namespace SchoolProject.Core.Features.Users.Commands.Handler
 {
-    public class UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, UserManager<User> userManager, ApplicationDBContext dBContext) : ResponseHandler(stringLocalizer), IRequestHandler<AddUserCommand, Response<string>>
+    public class UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, UserManager<Data.Entities.Identity.User> userManager, ApplicationDBContext dBContext) : ResponseHandler(stringLocalizer), IRequestHandler<AddUserCommand, Response<string>>
 
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer = stringLocalizer;
         private readonly IMapper _mapper = mapper;
-        private readonly UserManager<User> _userManager = userManager;
+        private readonly UserManager<Data.Entities.Identity.User> _userManager = userManager;
         private readonly ApplicationDBContext _dBContext = dBContext;
 
         public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
@@ -32,7 +32,7 @@ namespace SchoolProject.Core.Features.Users.Commands.Handler
                 var username = await _userManager.FindByNameAsync(request.UserName);
 
                 if (username != null) return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserNameIsExist]);
-                var UserMapping = _mapper.Map<User>(request);   
+                var UserMapping = _mapper.Map<Data.Entities.Identity.User>(request);   
                 IdentityResult result = await _userManager.CreateAsync(UserMapping,request.Password);
 
                 if (result.Succeeded)

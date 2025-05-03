@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 
-
 namespace SchoolProject.Core.Mapping.Users
 {
     public partial class UserProfile: Profile
@@ -8,6 +7,8 @@ namespace SchoolProject.Core.Mapping.Users
         public UserProfile()
         {
             AddUserMapping();
+            GetUserPaginationQueryMapping();
+            GetUserByIdQueryMapping();
         }
 
     }
