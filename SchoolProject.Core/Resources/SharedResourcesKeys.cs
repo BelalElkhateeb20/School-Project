@@ -59,5 +59,6 @@ namespace SchoolProject.Core.Resources
         public const string Mustnotbenull = "Must not be null";
         public const string ExceedingTheMaxLength = "Exceeding TheMax Length";
         public const string ProcessFailed = "Process Failed";
+        public const string PasswordChangedSuccessfully = "Password Changed Successfully";
     }
 }

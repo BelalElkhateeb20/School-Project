@@ -1,11 +1,13 @@
 ﻿
 using AutoMapper;
+using Bogus.DataSets;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Basies;
 using SchoolProject.Core.Features.User.Commands.Models;
+using SchoolProject.Core.Features.User.Commands.Validator;
 using SchoolProject.Core.Features.Users.Commands.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Data.Entities.Identity;
@@ -16,7 +18,8 @@ namespace SchoolProject.Core.Features.Users.Commands.Handler
     public class UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, UserManager<Data.Entities.Identity.User> userManager, ApplicationDBContext dBContext) : ResponseHandler(stringLocalizer)
         , IRequestHandler<AddUserCommand, Response<string>>
         , IRequestHandler< UpdateUserCommand, Response<string>>,
-        IRequestHandler<DeleteUserCommand, Response<string>>
+        IRequestHandler<DeleteUserCommand, Response<string>>,
+        IRequestHandler<ChangeUserPasswardCommand, Response<string>>
 
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer = stringLocalizer;
@@ -44,7 +47,7 @@ namespace SchoolProject.Core.Features.Users.Commands.Handler
                     tran.Commit();
                     return Created<string>();
                 }
-                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FaildToAddUser]); ;
+                return BadRequest<string>(string.Join(", ", result.Errors.Select(x => x.Description)));
             }
             catch
             {
@@ -98,6 +101,35 @@ namespace SchoolProject.Core.Features.Users.Commands.Handler
                 trans.Rollback();
                 return Faild<string>(_stringLocalizer[SharedResourcesKeys.DeletedFailed]);
             }
+        }
+
+        public async Task<Response<string>> Handle(ChangeUserPasswardCommand request, CancellationToken cancellationToken)
+        {
+            var trans = await _dBContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id.Equals(request.Id));
+                if (user == null) return NotFound<string>();
+
+                var passwordHasher = new PasswordHasher<Data.Entities.Identity.User>();
+                var passresult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, request.OldPassward);
+
+                if (passresult.Equals( request.OldPassward)) return Faild<string>(_stringLocalizer[SharedResourcesKeys.PasswordNotCorrect]);
+
+                var result = await _userManager.ChangePasswordAsync(user,request.OldPassward, request.NewPassward);
+                if (result.Succeeded)
+                {
+                    trans.Commit();
+                    return Success<string>(_stringLocalizer[SharedResourcesKeys.PasswordChangedSuccessfully]);
+                }
+                return Faild<string>(_stringLocalizer[SharedResourcesKeys.ChangePassFailed]);
+            }
+            catch
+            {
+                trans.Rollback();
+                return Faild<string>(_stringLocalizer[SharedResourcesKeys.ChangePassFailed]);
+            }
+
         }
     }
 }

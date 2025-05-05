@@ -35,6 +35,7 @@
             public const string Update = perfix + update; // API/V1/User/update
             public const string Delete = perfix + delete; // API/V1/User/delete
             public const string Paginate = perfix + paginate; // API/V1/User/Paginate
+            public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/User/ChangeUserPassward
         }
     }
 }
