@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolProject.API.Base;
 using SchoolProject.Core.Features.User.Commands.Models;
 using SchoolProject.Core.Features.User.Query.Models;
@@ -10,9 +11,11 @@ namespace SchoolProject.API.Controllers
 {
 
     [ApiController]
+    [Authorize]
     public class UserController : AppController
     {
         [HttpPost]
+        [AllowAnonymous]
         [Route(Router.User.perfix)]
         public async Task<IActionResult> AddUserAsync(  AddUserCommand addUser )
         {

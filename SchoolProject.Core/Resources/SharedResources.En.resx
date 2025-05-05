@@ -282,4 +282,7 @@
   <data name="UserNameIsNotExist" xml:space="preserve">
     <value>UserName Is Not Exist</value>
   </data>
+  <data name="UserNameOrPasswardIsWrong" xml:space="preserve">
+    <value>UserNameOrPassward IsWrong</value>
+  </data>
 </root>

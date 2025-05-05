@@ -60,5 +60,6 @@ namespace SchoolProject.Core.Resources
         public const string ExceedingTheMaxLength = "Exceeding TheMax Length";
         public const string ProcessFailed = "Process Failed";
         public const string PasswordChangedSuccessfully = "Password Changed Successfully";
+        public const string UserNameOrPasswardIsWrong = "UserNameOrPassward Is Wrong";
     }
 }

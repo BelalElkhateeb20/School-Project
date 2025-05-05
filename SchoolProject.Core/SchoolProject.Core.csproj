@@ -30,4 +30,9 @@
     <PackageReference Include="SendGrid" Version="9.29.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Authentication\Commands\Validator\" />
+    <Folder Include="Features\Authentication\Query\" />
+  </ItemGroup>
+
 </Project>

@@ -34,8 +34,19 @@
             public const string GetById = perfix + singleroute; // API/V1/User/{id}
             public const string Update = perfix + update; // API/V1/User/update
             public const string Delete = perfix + delete; // API/V1/User/delete
+            public const string Paginate = perfix + paginate; // API/V1/Authentication/Paginate
+            public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/Authentication/ChangeUserPassward
+        }
+        public static class Authentication
+        {
+            public const string perfix = Rule + "/Authentication"; // Corrected to API/V1/Authentication
+            public const string GetAll = perfix + "/List"; // API/V1/Authentication/List
+            public const string GetById = perfix + singleroute; // API/V1/Authentication/{id}
+            public const string Update = perfix + update; // API/V1/Authentication/update
+            public const string Delete = perfix + delete; // API/V1/Authentication/delete
             public const string Paginate = perfix + paginate; // API/V1/User/Paginate
             public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/User/ChangeUserPassward
+            public const string SignIn = perfix + "/SignIn"; // API/V1/User/SignIn
         }
     }
 }

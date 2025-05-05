@@ -30,7 +30,7 @@ namespace SchoolProject.API
             builder.Services.AddInfraStructureDependencies()
                 .AddServiceDependencies()
                 .AddCoreDependencies()
-                .AddServiceRegistration();
+                .AddServiceRegistration(builder.Configuration);
 
             #endregion
 
@@ -91,6 +91,7 @@ namespace SchoolProject.API
 
             app.UseCors("AllowSpecificOrigins");
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
 

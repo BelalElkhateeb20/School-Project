@@ -282,4 +282,7 @@
   <data name="UserNameIsNotExist" xml:space="preserve">
     <value>اسم المستخدم هذا  غير موجود </value>
   </data>
+  <data name="UserNameOrPasswardIsWrong" xml:space="preserve">
+    <value>اسم المستخدم او كلمه المرور غير صحيحه</value>
+  </data>
 </root>
