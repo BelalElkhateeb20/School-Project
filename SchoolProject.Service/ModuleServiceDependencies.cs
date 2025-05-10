@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SchoolProject.Data.Helpers;
+using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.infraStructure.Repositories;
 using SchoolProject.Service.Abstracts;
 using SchoolProject.Service.implementaion;
+using System.Collections.Concurrent;
 
 namespace SchoolProject.Service
 {
@@ -9,9 +12,12 @@ namespace SchoolProject.Service
     {
         public static IServiceCollection AddServiceDependencies(this IServiceCollection services)
         {
-             services.AddTransient<IStudentService, StudentService>();
-             services.AddTransient<IDepartmentService, DepartmentService>();
-             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
+
+            services.AddSingleton(new ConcurrentDictionary<string, RefreshToken>());
             return services;
         }
     }

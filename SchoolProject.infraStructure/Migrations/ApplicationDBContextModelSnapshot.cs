@@ -272,7 +272,7 @@ namespace SchoolProject.infraStructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRefreshToken");
+                    b.ToTable("UserRefreshToken", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Views.Department", b =>
@@ -427,7 +427,7 @@ namespace SchoolProject.infraStructure.Migrations
 
                     b.HasIndex("InsId");
 
-                    b.ToTable("Ins_Subject");
+                    b.ToTable("Ins_Subject", (string)null);
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Views.Instructor", b =>
@@ -468,7 +468,7 @@ namespace SchoolProject.infraStructure.Migrations
 
                     b.HasIndex("SupervisorId");
 
-                    b.ToTable("Instructor");
+                    b.ToTable("Instructor", (string)null);
 
                     b.HasData(
                         new
