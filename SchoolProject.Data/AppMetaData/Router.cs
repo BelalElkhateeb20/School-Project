@@ -46,7 +46,10 @@
             public const string Delete = perfix + delete; // API/V1/Authentication/delete
             public const string Paginate = perfix + paginate; // API/V1/User/Paginate
             public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/User/ChangeUserPassward
-            public const string SignIn = perfix + "/SignIn"; // API/V1/User/SignIn
+            public const string SignIn = perfix + "/SignIn"; 
+            public const string RefreshToken = perfix + "/RefreshToken"; 
+            public const string ValidateToken = perfix + "/ValidateToken"; 
+
         }
     }
 }

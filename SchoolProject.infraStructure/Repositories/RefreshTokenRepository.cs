@@ -9,6 +9,6 @@ namespace SchoolProject.infraStructure.Repositories
 {
     public class RefreshTokenRepository(ApplicationDBContext context):GenericRepositoryAsync<UserRefreshToken>(context) , IRefreshTokenRepository
     {
-        private readonly DbSet<UserRefreshToken> _departments = context.Set<UserRefreshToken>();
+        private readonly DbSet<UserRefreshToken>  _userRefreshTokens = context.Set<UserRefreshToken>();
     }
 }

@@ -2,12 +2,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
+using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Core.Basies;
 using SchoolProject.Core.Features.Authentication.Commands.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.Service.Abstracts;
+using System.Text;
 
 namespace SchoolProject.Core.Features.Authentication.Commands.Handler
 {
@@ -17,6 +19,9 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
         IAuthenticationService authenticationService
         ,SignInManager<Data.Entities.Identity.User> signInManager) : ResponseHandler(localizer)
         ,IRequestHandler<SignInCommand, Response<JwtAuthRespone>>
+        ,IRequestHandler<RefreshTokenCommand, Response<JwtAuthRespone>>
+        ,IRequestHandler<ValidateTokenCommand, Response<TokenValidatedResult>>
+        
     {
         private readonly IStringLocalizer<SharedResources> _localizer = localizer;
         private readonly UserManager<Data.Entities.Identity.User> _userManager = userManager;
@@ -34,6 +39,18 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
             //Generate Token
             var jwttoken =  await _authenticationService.GetJWTToken(user);
             return Success(jwttoken);
+        }
+
+        public async Task<Response<JwtAuthRespone>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            var response = await _authenticationService.GetRefrechToken(request.AccessToken, request.RefreshToken);
+            return Success(response);
+        }
+
+        public async Task<Response<TokenValidatedResult>> Handle(ValidateTokenCommand request, CancellationToken cancellationToken)
+        {
+            var response = _authenticationService.ValidateToken(request.AccessToken);
+            return Success(response);
         }
     }
 }
