@@ -186,6 +186,9 @@
   <data name="InvaildCode" xml:space="preserve">
     <value>هذا الكود غير صحيح</value>
   </data>
+  <data name="InvalidAndexpiredToken" xml:space="preserve">
+    <value>Invalid And expired Token</value>
+  </data>
   <data name="IsExist" xml:space="preserve">
     <value>موجود بالفعل</value>
   </data>
@@ -284,5 +287,8 @@
   </data>
   <data name="UserNameOrPasswardIsWrong" xml:space="preserve">
     <value>اسم المستخدم او كلمه المرور غير صحيحه</value>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>التوكن غير صالح</value>
   </data>
 </root>

@@ -106,7 +106,7 @@ namespace SchoolProject.Service.implementaion
             //chech refreshtoken is found or not 
             var savedRefreshToken = await _refreshTokenRepository.GetTableNoTracking().FirstOrDefaultAsync(x => x.RefreshToken == refreshToken && x.UserId == int.Parse(userid));// Error
             if (savedRefreshToken.ExpiryDate < DateTime.UtcNow || savedRefreshToken is null || savedRefreshToken.IsUsed || savedRefreshToken.IsRevoked)
-                throw new SecurityTokenException("Refreshtoken غير صالح");
+                throw new SecurityTokenException("Refreshtoken  غير صالح سجل دخول مره اخرى ");
             //for Securety check if JWTid is Good 
             if (savedRefreshToken.JwtId == jwttoken.Id)
             {
@@ -120,7 +120,6 @@ namespace SchoolProject.Service.implementaion
             return await response;
         }
 
-
         public TokenValidatedResult ValidateToken(string accessToken)
         {
             var handler = new JwtSecurityTokenHandler();
@@ -133,41 +132,54 @@ namespace SchoolProject.Service.implementaion
                 ValidateIssuerSigningKey = _jwtSettings.ValidateIssuerSigningKey,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)),
                 ValidateLifetime = _jwtSettings.ValidateLifeTime,
-                ClockSkew = TimeSpan.Zero // لمنع تأخير الثواني
+                ClockSkew = TimeSpan.Zero // بدون مهلة سماح
             };
-
             try
             {
+                // محاولة التحقق من التوكن
                 var principal = handler.ValidateToken(accessToken, parameters, out SecurityToken validatedToken);
+
+                // التأكد من أن التوكن لم ينتهِ صلاحيته
+                if (validatedToken is JwtSecurityToken jwtToken &&
+                    jwtToken.ValidTo < DateTime.UtcNow)
+                {
+                    return new TokenValidatedResult
+                    {
+                        IsValid = false,
+                        IsExpired = true,
+                        Message = "Token is expired"
+                    };
+                }
+
                 return new TokenValidatedResult
                 {
                     IsValid = true,
                     IsExpired = false,
                     Message = "Token is valid",
-                    Principal = principal
+
                 };
             }
-            catch (Exception ex) when (ex is SecurityTokenExpiredException || ex is SecurityTokenException || ex is Exception)
+            catch (Exception ex)
             {
                 return ex switch
                 {
-                    SecurityTokenExpiredException _ => new TokenValidatedResult
+                    SecurityTokenExpiredException => new TokenValidatedResult
                     {
                         IsValid = false,
                         IsExpired = true,
-                        Message = "Token has expired"
+                        Message = "Token is expired"
                     },
-                    SecurityTokenException _ => new TokenValidatedResult
+                    SecurityTokenException => new TokenValidatedResult
                     {
                         IsValid = false,
                         IsExpired = false,
-                        Message = $"Invalid token: {ex.Message}"
+                        Message = "Token is invalid"
                     },
                     _ => new TokenValidatedResult
                     {
                         IsValid = false,
                         IsExpired = false,
-                        Message = $"Unexpected error: {ex.Message}"
+                        Message = $"Bad Request: {ex.Message}"
                     }
                 };
             }

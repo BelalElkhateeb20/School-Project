@@ -17,7 +17,6 @@ namespace SchoolProject.Service
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
 
-            services.AddSingleton(new ConcurrentDictionary<string, RefreshToken>());
             return services;
         }
     }

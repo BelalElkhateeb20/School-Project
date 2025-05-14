@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using SchoolProject.Core.Basies;
 using SchoolProject.Core.Features.Authentication.Commands.Models;
 using SchoolProject.Core.Resources;
@@ -15,13 +16,13 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
 {
     public class AuthenticationHandler(
         IStringLocalizer<SharedResources> localizer
-        ,UserManager<Data.Entities.Identity.User> userManager,
+        , UserManager<Data.Entities.Identity.User> userManager,
         IAuthenticationService authenticationService
-        ,SignInManager<Data.Entities.Identity.User> signInManager) : ResponseHandler(localizer)
-        ,IRequestHandler<SignInCommand, Response<JwtAuthRespone>>
-        ,IRequestHandler<RefreshTokenCommand, Response<JwtAuthRespone>>
-        ,IRequestHandler<ValidateTokenCommand, Response<TokenValidatedResult>>
-        
+        , SignInManager<Data.Entities.Identity.User> signInManager) : ResponseHandler(localizer)
+        , IRequestHandler<SignInCommand, Response<JwtAuthRespone>>
+        , IRequestHandler<RefreshTokenCommand, Response<JwtAuthRespone>>
+        , IRequestHandler<ValidateTokenCommand, Response<TokenValidatedResult>>
+
     {
         private readonly IStringLocalizer<SharedResources> _localizer = localizer;
         private readonly UserManager<Data.Entities.Identity.User> _userManager = userManager;
@@ -33,11 +34,11 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null) return NotFound<JwtAuthRespone>(_localizer[SharedResourcesKeys.UserNameIsNotExist]);
             //signin
-            var signin =  _signInManager.CheckPasswordSignInAsync(user,request.Passward,false);
+            var signin = _signInManager.CheckPasswordSignInAsync(user, request.Passward, false);
             if (!signin.IsCompletedSuccessfully) return Faild<JwtAuthRespone>(_localizer[SharedResourcesKeys.UserNameOrPasswardIsWrong]);
 
             //Generate Token
-            var jwttoken =  await _authenticationService.GetJWTToken(user);
+            var jwttoken = await _authenticationService.GetJWTToken(user);
             return Success(jwttoken);
         }
 
@@ -46,11 +47,18 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handler
             var response = await _authenticationService.GetRefrechToken(request.AccessToken, request.RefreshToken);
             return Success(response);
         }
-
         public async Task<Response<TokenValidatedResult>> Handle(ValidateTokenCommand request, CancellationToken cancellationToken)
         {
-            var response = _authenticationService.ValidateToken(request.AccessToken);
-            return Success(response);
+            var result = _authenticationService.ValidateToken(request.AccessToken);
+            var response= (result.IsValid, result.IsExpired) switch
+            {
+                (false, true) => Faild<TokenValidatedResult>(_localizer[SharedResourcesKeys.TokenIsExpired]),
+                (true, false) => Success(result, _localizer[SharedResourcesKeys.TokenIsNotExpired]),
+                (false, false) => Faild<TokenValidatedResult>(_localizer[SharedResourcesKeys.InvalidAndexpiredToken]),
+                _ => Faild<TokenValidatedResult>(_localizer[_localizer[SharedResourcesKeys.BadRequest]])
+            };
+            return response;
         }
+
     }
 }

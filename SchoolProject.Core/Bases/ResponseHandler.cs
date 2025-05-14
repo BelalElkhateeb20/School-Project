@@ -27,14 +27,14 @@ namespace SchoolProject.Core.Basies
             };
         }
 
-        public Response<T> Success<T>(T entity, object Meta = null)
+        public Response<T> Success<T>(T entity, object Meta = null,string Message=null)
         {
             return new Response<T>()
             {
                 Data = entity,
                 StatusCode = HttpStatusCode.OK,
                 Succeeded = true,
-                Message = _stringLocalizer[SharedResourcesKeys.Success],
+                Message = Message = Message == null ? _stringLocalizer[SharedResourcesKeys.BadRequest] : Message,
                 Meta = Meta
             };
         }

@@ -61,5 +61,7 @@ namespace SchoolProject.Core.Resources
         public const string ProcessFailed = "Process Failed";
         public const string PasswordChangedSuccessfully = "Password Changed Successfully";
         public const string UserNameOrPasswardIsWrong = "UserNameOrPassward Is Wrong";
+        public const string InvalidToken = "Invalid Token";
+        public const string InvalidAndexpiredToken = "Invalid And expired Token";
     }
 }

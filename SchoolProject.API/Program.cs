@@ -86,7 +86,6 @@ namespace SchoolProject.API
             var locoptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locoptions.Value);
             #endregion
-
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseCors("AllowSpecificOrigins");
