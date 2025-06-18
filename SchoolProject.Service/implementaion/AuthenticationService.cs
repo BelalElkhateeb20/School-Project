@@ -5,11 +5,11 @@ using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.infraStructure.Abstracts;
 using SchoolProject.Service.Abstracts;
-using System.Collections.Concurrent;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 
 namespace SchoolProject.Service.implementaion
@@ -23,7 +23,7 @@ namespace SchoolProject.Service.implementaion
         public async Task<JwtAuthRespone> GetJWTToken(User user)
         {
 
-            var jwttoken = GenerateJwtToken(user);
+            var jwttoken = await GenerateJwtToken(user);
             var refreshtoken = GetRefrechToken(user.UserName);
             var saverefreshtoken = new UserRefreshToken
             {
@@ -40,7 +40,7 @@ namespace SchoolProject.Service.implementaion
             await _refreshTokenRepository.AddAsync(saverefreshtoken);
             return new JwtAuthRespone
             {
-                AccessToken = jwttoken.Item2,
+                AccessToken =  jwttoken.Item2,
                 RefreshToken = refreshtoken
 
             };
@@ -62,15 +62,20 @@ namespace SchoolProject.Service.implementaion
             rondomnumgenerate.GetBytes(rondomnum);
             return Convert.ToBase64String(rondomnum);
         }
-        private List<Claim> GetClaims(User user)
+        private List<Claim> GetClaims(User user ,IList<string> roles)
         {
             var claims = new List<Claim>
             {
-                new(nameof (UserClaimModel.UserName),user.UserName),
-                new (nameof( UserClaimModel.Email),user.Email),
-                new(nameof( UserClaimModel.PhoneNumber),user.PhoneNumber),
-                new (nameof(UserClaimModel.Id),user.Id.ToString())
+                new(ClaimTypes.Name,user.UserName),
+                new (ClaimTypes.Email,user.Email),
+                new(ClaimTypes.MobilePhone,user.PhoneNumber),
+                new(ClaimTypes.Role,"Student"),
+                new (ClaimTypes.NameIdentifier,user.Id.ToString())
             };
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim( ClaimTypes.Role,role));
+            }
             return claims;
         }
         private JwtSecurityToken ReadToken(string accessToken)
@@ -79,10 +84,11 @@ namespace SchoolProject.Service.implementaion
             var response = handler.ReadJwtToken(accessToken);
             return response;
         }
-        private (JwtSecurityToken, string, string) GenerateJwtToken(User user)
+        private async Task<(JwtSecurityToken,string,string)> GenerateJwtToken(User user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
             var jti = Guid.NewGuid().ToString(); // ← generate JWT ID
-            var claims = GetClaims(user);
+            var claims = GetClaims(user,roles);
 
             var jwttoken = new JwtSecurityToken
             (_jwtSettings.Issuer,
@@ -102,7 +108,7 @@ namespace SchoolProject.Service.implementaion
 
             if (jwttoken.ValidTo > DateTime.UtcNow) throw new SecurityTokenException("jwttoken is not Expired");
 
-            var userid = jwttoken.Claims.FirstOrDefault(x => x.Type == nameof(UserClaimModel.Id)).Value;
+            var userid = jwttoken.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
             //chech refreshtoken is found or not 
             var savedRefreshToken = await _refreshTokenRepository.GetTableNoTracking().FirstOrDefaultAsync(x => x.RefreshToken == refreshToken && x.UserId == int.Parse(userid));// Error
             if (savedRefreshToken.ExpiryDate < DateTime.UtcNow || savedRefreshToken is null || savedRefreshToken.IsUsed || savedRefreshToken.IsRevoked)
@@ -184,6 +190,25 @@ namespace SchoolProject.Service.implementaion
                 };
             }
 
+        }
+
+        public async Task<string> ConfirmEmail(int userid, string token)
+        {
+            if (userid == null || token == null)
+                return ("InValid Token OR UserID ");
+
+            var user = await _userManager.FindByIdAsync(userid.ToString());
+            if (user == null)
+                return ("User not found");
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                user.EmailConfirmed = true;
+                return ("Email confirmed successfully");
+            }
+            else
+                return ("Email confirmation failed");
         }
     }
 }

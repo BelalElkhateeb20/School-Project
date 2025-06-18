@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolProject.API.Base;
 using SchoolProject.Core.Features.Authentication.Commands.Models;
+using SchoolProject.Core.Features.Authentication.Query.Models;
 using SchoolProject.Data.Router;
 
 namespace SchoolProject.API.Controllers
@@ -25,9 +26,16 @@ namespace SchoolProject.API.Controllers
         }
         [HttpPost]
         [Route(Router.Authentication.ValidateToken)]
-        public async Task<IActionResult> ValidateToken( [FromForm]ValidateTokenCommand  validateToken)
+        public async Task<IActionResult> ValidateToken( [FromForm]ValidateTokenCommand validateToken)
         {
             var response = await Mediator.Send(validateToken);
+            return NewResult(response);
+        }
+        [HttpGet]
+        [Route(Router.Authentication.ConfirmEmail)]
+        public async Task<IActionResult> ConfirmEmailAsync( [FromQuery] ConfirmEmailQuery  confirmEmailQuery )
+        {
+            var response = await Mediator.Send(confirmEmailQuery);
             return NewResult(response);
         }
     }

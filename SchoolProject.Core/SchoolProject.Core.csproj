@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Features\Departments\Command\**" />
     <Compile Remove="Features\Departments\Query\Validators\**" />
-    <EmbeddedResource Remove="Features\Departments\Command\**" />
     <EmbeddedResource Remove="Features\Departments\Query\Validators\**" />
-    <None Remove="Features\Departments\Command\**" />
     <None Remove="Features\Departments\Query\Validators\**" />
   </ItemGroup>
 
@@ -22,17 +19,22 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
-    <PackageReference Include="FluentValidation" Version="11.11.0" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
-    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.5" />
     <PackageReference Include="SendGrid" Version="9.29.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Features\Authentication\Commands\Validator\" />
-    <Folder Include="Features\Authentication\Query\" />
+    <Folder Include="Features\Authentication\Query\Validator\" />
+    <Folder Include="Features\Authorization\Query\" />
+    <Folder Include="Features\Departments\Command\" />
+    <Folder Include="Features\Emails\Commands\Validator\" />
+    <Folder Include="Features\Emails\Query\" />
+    <Folder Include="Mapping\Role\QueryMapping\" />
   </ItemGroup>
 
 </Project>

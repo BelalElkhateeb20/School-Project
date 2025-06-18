@@ -1,4 +1,5 @@
 ﻿using SchoolProject.Data.Commons;
+using SchoolProject.Data.Entities.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,9 +15,13 @@ namespace SchoolProject.Data.Entities.Views
         }
         [Key]
         public int InsId { get; set; }
+        public int UserId { get; set; }
         public string? ENameAr { get; set; }
         public string? ENameEn { get; set; }
+
+
         public string? Address { get; set; }
+        public string? Email { get; set; }
         public string? Position { get; set; }
         public int? SupervisorId { get; set; }
         [Column(TypeName = "decimal(18,2)")]
@@ -42,5 +47,9 @@ namespace SchoolProject.Data.Entities.Views
 
         [InverseProperty("Instructor")]
         public virtual ICollection <Ins_Subject> Ins_Subjects { get; set; }
+        [ForeignKey("UserId")]
+        [InverseProperty("Instructor")]
+        public User User { get; set; }
+
     }
 }

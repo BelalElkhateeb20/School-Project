@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
@@ -24,9 +27,12 @@ namespace SchoolProject.API
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DBContext"));
             });
-            #endregion
 
+            #endregion
+            builder.Services.AddHttpContextAccessor(); 
+            builder.Services.AddRouting();
             #region Dependency Injection  
+
             builder.Services.AddInfraStructureDependencies()
                 .AddServiceDependencies()
                 .AddCoreDependencies()
@@ -69,7 +75,8 @@ namespace SchoolProject.API
                                   {
                                       policy.AllowAnyHeader()
                                             .AllowAnyMethod()
-                                            .AllowAnyOrigin();
+                                            .AllowAnyOrigin()
+                                            ;
 
                                   });
             });
@@ -81,6 +88,11 @@ namespace SchoolProject.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseRouting();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             #region Localization Middleware
             var locoptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
@@ -92,6 +104,7 @@ namespace SchoolProject.API
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.MapControllers();
 
             app.Run();

@@ -7,7 +7,7 @@
 namespace SchoolProject.infraStructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddSubjectSeedingData : Migration
+    public partial class AddSubjectSeeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -22,6 +22,7 @@ namespace SchoolProject.infraStructure.Data
             modelBuilder.ApplyConfiguration(new StudentSeedingConfig());
             modelBuilder.ApplyConfiguration(new InstractorSeedingConfig());
             modelBuilder.ApplyConfiguration(new SubjectSeedingConfig());
+            modelBuilder.ApplyConfiguration(new UserSeedingConfig());
             #endregion
 
             #region Relationships
@@ -46,6 +47,18 @@ namespace SchoolProject.infraStructure.Data
                 .WithOne(x => x.DepartmentManager)
                 .HasForeignKey<Department>(x => x.InsManager)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.User)
+                .WithOne(u => u.Student)
+                .HasForeignKey<Student>(s => s.UserId);
+
+            modelBuilder.Entity<Instructor>()
+                .HasOne(s => s.User)
+                .WithOne(u => u.Instructor)
+                .HasForeignKey<Instructor>(s => s.UserId);
+
+
             #endregion
 
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
@@ -56,12 +69,12 @@ namespace SchoolProject.infraStructure.Data
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<Student> students { get; set; }
+        public DbSet<Instructor> instructors { get; set; }
         public DbSet<Department> departments { get; set; }
         public DbSet<Subject> subjects { get; set; }
         public DbSet<StudentSubjects> studentSubjects { get; set; }
         public DbSet<DepartmentSubject> departmentSubjects { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<Role> Roles { get; set; }
+
 
     }
 }

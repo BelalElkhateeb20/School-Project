@@ -11,12 +11,12 @@ namespace SchoolProject.API.Controllers
 {
 
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : AppController
     {
         [HttpPost]
         [AllowAnonymous]
-        [Route(Router.User.perfix)]
+        [Route(Router.User.AddUser)]
         public async Task<IActionResult> AddUserAsync(  AddUserCommand addUser )
         {
             var response = await Mediator.Send(addUser);

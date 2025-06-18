@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.infraStructure.Data;
+using System.Security.Claims;
 using System.Text;
 namespace SchoolProject.infraStructure
 {
@@ -20,6 +21,9 @@ namespace SchoolProject.infraStructure
                     options.Password.RequireDigit = true;
                     options.User.RequireUniqueEmail = true;
                     options.SignIn.RequireConfirmedAccount = true;
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
                 }).AddEntityFrameworkStores<ApplicationDBContext>()
                 .AddDefaultTokenProviders();
 
@@ -27,7 +31,9 @@ namespace SchoolProject.infraStructure
             var jwtSettings = new JwtSettings();
             configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
             services.AddSingleton(jwtSettings);
-
+            var emailsetting = new EmailSettings();
+            configuration.GetSection(nameof(EmailSettings)).Bind(emailsetting);
+            services.AddSingleton(emailsetting);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -46,6 +52,7 @@ namespace SchoolProject.infraStructure
                    ValidAudience = jwtSettings.Audience,
                    ValidateAudience = jwtSettings.ValidateAudience,
                    ValidateLifetime = jwtSettings.ValidateLifeTime,
+                   RoleClaimType = ClaimTypes.Role,
                };
            });
 

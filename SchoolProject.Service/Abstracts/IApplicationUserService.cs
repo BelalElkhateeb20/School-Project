@@ -1,14 +1,10 @@
-﻿//using SchoolProject.Data.Entities.Identity;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using SchoolProject.Data.Entities.Identity;
 
-//namespace SchoolProject.Service.Abstracts
-//{
-//    public interface IApplicationUserService
-//    {
-//        public Task<string> AddAsyenc(User userName, string password);
-//    }
-//}
+namespace SchoolProject.Service.Abstracts
+{
+    public interface IApplicationUserService
+    {
+        public Task<string> AddAsyenc(User userName, string password ,string role ,int departmentid);
+        public Task GenerateEmailToken(User user);
+    }
+}

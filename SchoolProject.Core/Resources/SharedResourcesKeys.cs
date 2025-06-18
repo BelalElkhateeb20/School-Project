@@ -63,5 +63,7 @@ namespace SchoolProject.Core.Resources
         public const string UserNameOrPasswardIsWrong = "UserNameOrPassward Is Wrong";
         public const string InvalidToken = "Invalid Token";
         public const string InvalidAndexpiredToken = "Invalid And expired Token";
+        public const string RoleIsExist = "Role Is Exist";
+        public const string Youraccountislocked = "Your account is locked. Try again after 15 minutes.";
     }
 }

@@ -34,7 +34,7 @@ namespace SchoolProject.Core.Basies
                 Data = entity,
                 StatusCode = HttpStatusCode.OK,
                 Succeeded = true,
-                Message = Message = Message == null ? _stringLocalizer[SharedResourcesKeys.BadRequest] : Message,
+                Message = Message = Message == null ? _stringLocalizer[SharedResourcesKeys.Success] : Message,
                 Meta = Meta
             };
         }

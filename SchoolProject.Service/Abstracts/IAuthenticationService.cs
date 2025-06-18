@@ -13,5 +13,6 @@ namespace SchoolProject.Service.Abstracts
         public Task<JwtAuthRespone> GetJWTToken(User user);
         public Task<JwtAuthRespone> GetRefrechToken(string accessToken,string refreshToken);
         public TokenValidatedResult ValidateToken(string accessToken);
+        public Task<string> ConfirmEmail(int userid,string token);
     }
 }

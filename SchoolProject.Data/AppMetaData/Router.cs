@@ -36,19 +36,47 @@
             public const string Delete = perfix + delete; // API/V1/User/delete
             public const string Paginate = perfix + paginate; // API/V1/Authentication/Paginate
             public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/Authentication/ChangeUserPassward
+            public const string AddUser = perfix + "/AddUser"; // API/V1/Authentication/ChangeUserPassward
         }
         public static class Authentication
         {
             public const string perfix = Rule + "/Authentication"; // Corrected to API/V1/Authentication
-            public const string GetAll = perfix + "/List"; // API/V1/Authentication/List
-            public const string GetById = perfix + singleroute; // API/V1/Authentication/{id}
-            public const string Update = perfix + update; // API/V1/Authentication/update
-            public const string Delete = perfix + delete; // API/V1/Authentication/delete
-            public const string Paginate = perfix + paginate; // API/V1/User/Paginate
+            public const string perfix2 = "Authentication"; // Corrected to Authentication
             public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/User/ChangeUserPassward
             public const string SignIn = perfix + "/SignIn"; 
             public const string RefreshToken = perfix + "/RefreshToken"; 
             public const string ValidateToken = perfix + "/ValidateToken"; 
+            public const string ConfirmEmail = perfix2+ "/ConfirmEmailAsync";
+
+        }
+        public static class Authorization
+        {
+            public const string perfix = Rule + "/Authorization"; // Corrected to API/V1/Authorization
+            public const string GetAll = perfix + "/List"; // API/V1/Authorization/List
+            public const string GetById = perfix + singleroute; // API/V1/Authorization/{id}
+            public const string Update = perfix + update; // API/V1/Authorization/update
+            public const string Delete = perfix + delete; // API/V1/Authorization/delete
+            public const string Paginate = perfix + paginate; // API/V1/Authorization/Paginate
+            public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/Authorization/ChangeUserPassward
+            public const string SignIn = perfix + "/SignIn";
+            public const string RefreshToken = perfix + "/RefreshToken";
+            public const string ValidateToken = perfix + "/ValidateToken";
+            public const string AddRole = perfix + "/AddRole"; // API/V1/Authorization/AddRole
+
+        }
+        public static class Email
+        {
+            public const string perfix = Rule + "/Email"; // Corrected to API/V1/Email
+            public const string GetAll = perfix + "/List"; // API/V1/Email/List
+            public const string GetById = perfix + singleroute; // API/V1/Email/{id}
+            public const string Update = perfix + update; // API/V1/Email/update
+            public const string Delete = perfix + delete; // API/V1/Email/delete
+            public const string Paginate = perfix + paginate; // API/V1/Email/Paginate
+            public const string ChangeUserPassward = perfix + "/ChangeUserPassward"; // API/V1/Email/ChangeUserPassward
+            public const string SignIn = perfix + "/SignIn";
+            public const string RefreshToken = perfix + "/RefreshToken";
+            public const string ValidateToken = perfix + "/ValidateToken";
+            public const string SendEmail = perfix + "/SendEmail"; // API/V1/Email/SendEmail
 
         }
     }

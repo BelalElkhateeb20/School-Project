@@ -291,4 +291,10 @@
   <data name="InvalidToken" xml:space="preserve">
     <value>التوكن غير صالح</value>
   </data>
+  <data name="RoleIsExist" xml:space="preserve">
+    <value>الدور موجود بالفعل</value>
+  </data>
+  <data name="Youraccountislocked" xml:space="preserve">
+    <value>تم غلق حسابك مؤقتا حاول مره اخرى بعد فتره </value>
+  </data>
 </root>

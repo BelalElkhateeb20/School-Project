@@ -17,7 +17,7 @@ namespace SchoolProject.infraStructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("ProductVersion", "9.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -170,6 +170,7 @@ namespace SchoolProject.infraStructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Code")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -216,12 +217,18 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("Supervisor")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("UserType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -234,6 +241,558 @@ namespace SchoolProject.infraStructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            Address = "123 Main St",
+                            Code = "Code1",
+                            ConcurrencyStamp = "CON_STAMP_USER1",
+                            Country = "Egypt",
+                            Email = "john.smith@example.com",
+                            EmailConfirmed = false,
+                            FullName = "John Smith",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHN.SMITH@EXAMPLE.COM",
+                            NormalizedUserName = "JOHN.SMITH",
+                            PasswordHash = "b4Xi+yJjC7uAwW2h7JqHgEPvQNkyukUcCKQJVJV7Hcw=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER1",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "john.smith",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            Address = "456 Oak Ave",
+                            Code = "Code2",
+                            ConcurrencyStamp = "CON_STAMP_USER2",
+                            Country = "Egypt",
+                            Email = "ali.ahmed@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Ali Ahmed",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ALI.AHMED@EXAMPLE.COM",
+                            NormalizedUserName = "ALI.AHMED",
+                            PasswordHash = "j/L0kmTWDDI+z8EtdWsfqSJK24rZzsNXh7XcClqdNJY=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER2",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "ali.ahmed",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            Address = "789 Pine Ln",
+                            Code = "Code3",
+                            ConcurrencyStamp = "CON_STAMP_USER3",
+                            Country = "Egypt",
+                            Email = "sara.kamal@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Sara Kamal",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SARA.KAMAL@EXAMPLE.COM",
+                            NormalizedUserName = "SARA.KAMAL",
+                            PasswordHash = "mzHt/LwX97iHnoLsyO9nUosJ1I7F/54buWUqL0V646M=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER3",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "sara.kamal",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            Address = "101 Elm St",
+                            Code = "Code4",
+                            ConcurrencyStamp = "CON_STAMP_USER4",
+                            Country = "Egypt",
+                            Email = "fatma.adel@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Fatma Adel",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "FATMA.ADEL@EXAMPLE.COM",
+                            NormalizedUserName = "FATMA.ADEL",
+                            PasswordHash = "Mw/DDLpeE+CgfHyyjy5O1lEsx5+UIx0NOw02ZqK2HjY=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER4",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "fatma.adel",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccessFailedCount = 0,
+                            Address = "202 Birch Ct",
+                            Code = "Code5",
+                            ConcurrencyStamp = "CON_STAMP_USER5",
+                            Country = "Egypt",
+                            Email = "mohamed.tarek@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Mohamed Tarek",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MOHAMED.TAREK@EXAMPLE.COM",
+                            NormalizedUserName = "MOHAMED.TAREK",
+                            PasswordHash = "fFvW7rprIKAbYotMRpBQuTG1ix/fX4pnRUjycbWed64=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER5",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "mohamed.tarek",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AccessFailedCount = 0,
+                            Address = "303 Cedar Dr",
+                            Code = "Code6",
+                            ConcurrencyStamp = "CON_STAMP_USER6",
+                            Country = "Egypt",
+                            Email = "nour.hassan@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Nour Hassan",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "NOUR.HASSAN@EXAMPLE.COM",
+                            NormalizedUserName = "NOUR.HASSAN",
+                            PasswordHash = "P3NdVltqV/V3I9VzH8CHVXlhXzMQ7UX+syFaXvQy2lU=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER6",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "nour.hassan",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AccessFailedCount = 0,
+                            Address = "404 Aspen Ave",
+                            Code = "Code7",
+                            ConcurrencyStamp = "CON_STAMP_USER7",
+                            Country = "Egypt",
+                            Email = "yousef.saleh@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Yousef Saleh",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "YOUSEF.SALEH@EXAMPLE.COM",
+                            NormalizedUserName = "YOUSEF.SALEH",
+                            PasswordHash = "G16gR2aMN5lQ7bw1f8bZccqevw3WYHPC0ns8Nf0q1m4=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER7",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "yousef.saleh",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AccessFailedCount = 0,
+                            Address = "505 Willow Rd",
+                            Code = "Code8",
+                            ConcurrencyStamp = "CON_STAMP_USER8",
+                            Country = "Egypt",
+                            Email = "laila.mostafa@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Laila Mostafa",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "LAILA.MOSTAFA@EXAMPLE.COM",
+                            NormalizedUserName = "LAILA.MOSTAFA",
+                            PasswordHash = "0aUJGH7GJspxFy3zkX4EhU6Aw/kBtNwO1HZ8+n8mtSo=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER8",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "laila.mostafa",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AccessFailedCount = 0,
+                            Address = "606 Poplar Ct",
+                            Code = "Code9",
+                            ConcurrencyStamp = "CON_STAMP_USER9",
+                            Country = "Egypt",
+                            Email = "hani.omar@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Hani Omar",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "HANI.OMAR@EXAMPLE.COM",
+                            NormalizedUserName = "HANI.OMAR",
+                            PasswordHash = "kv7glHpXBb7Z3rfqDWoZsWxSEfz/epw4//Fgh+dVuG0=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER9",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "hani.omar",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AccessFailedCount = 0,
+                            Address = "707 Sycamore Dr",
+                            Code = "Code10",
+                            ConcurrencyStamp = "CON_STAMP_USER10",
+                            Country = "Egypt",
+                            Email = "mona.ehab@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Mona Ehab",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MONA.EHAB@EXAMPLE.COM",
+                            NormalizedUserName = "MONA.EHAB",
+                            PasswordHash = "KUXsYmNVlgJrC5kBqvLAC6v+jP1bp9H1lZZsGk3jxk0=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER10",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "mona.ehab",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AccessFailedCount = 0,
+                            Address = "808 Dogwood Ln",
+                            Code = "Code11",
+                            ConcurrencyStamp = "CON_STAMP_USER11",
+                            Country = "Egypt",
+                            Email = "kareem.nabil@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Kareem Nabil",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "KAREEM.NABIL@EXAMPLE.COM",
+                            NormalizedUserName = "KAREEM.NABIL",
+                            PasswordHash = "1HszA3+L5W9LLQ1gkUHXw+5QCE1NNh0lJ2pi9Or1pnU=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER11",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "kareem.nabil",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AccessFailedCount = 0,
+                            Address = "909 Holly Blvd",
+                            Code = "Code12",
+                            ConcurrencyStamp = "CON_STAMP_USER12",
+                            Country = "Egypt",
+                            Email = "amira.samir@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Amira Samir",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AMIRA.SAMIR@EXAMPLE.COM",
+                            NormalizedUserName = "AMIRA.SAMIR",
+                            PasswordHash = "NEvp1D3TiCv8elXe3zJvyyNGOh6mCQ6DA7o9LrqZ5rs=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER12",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "amira.samir",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AccessFailedCount = 0,
+                            Address = "111 Acacia Cir",
+                            Code = "Code13",
+                            ConcurrencyStamp = "CON_STAMP_USER13",
+                            Country = "Egypt",
+                            Email = "osama.ibrahim@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Osama Ibrahim",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "OSAMA.IBRAHIM@EXAMPLE.COM",
+                            NormalizedUserName = "OSAMA.IBRAHIM",
+                            PasswordHash = "TklpDNqv9Y4VK+tUKcA6tdxL5Sh7LeZ9PtRmXHqrdNg=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER13",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "osama.ibrahim",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AccessFailedCount = 0,
+                            Address = "222 Banyan Pl",
+                            Code = "Code14",
+                            ConcurrencyStamp = "CON_STAMP_USER14",
+                            Country = "Egypt",
+                            Email = "nadine.sherif@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Nadine Sherif",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "NADINE.SHERIF@EXAMPLE.COM",
+                            NormalizedUserName = "NADINE.SHERIF",
+                            PasswordHash = "1Q7QfPPl+znQZuBx+pAfZx+rOC3y+UX1I/SoIQrLrKM=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER14",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "nadine.sherif",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AccessFailedCount = 0,
+                            Address = "333 Cypress Dr",
+                            Code = "Code15",
+                            ConcurrencyStamp = "CON_STAMP_USER15",
+                            Country = "Egypt",
+                            Email = "hossam.ali@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Hossam Ali",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "HOSSAM.ALI@EXAMPLE.COM",
+                            NormalizedUserName = "HOSSAM.ALI",
+                            PasswordHash = "5mpKYbOTqZckZKoXrrD9zrScV4gso4yd7hJQ4+rh3nM=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER15",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "hossam.ali",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AccessFailedCount = 0,
+                            Address = "444 Date Palm Ave",
+                            Code = "Code16",
+                            ConcurrencyStamp = "CON_STAMP_USER16",
+                            Country = "Egypt",
+                            Email = "rana.fathy@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Rana Fathy",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "RANA.FATHY@EXAMPLE.COM",
+                            NormalizedUserName = "RANA.FATHY",
+                            PasswordHash = "6oJUK3OozE93tWHNgX++y0GLKzVb0xHqMlzkk+AmIkQ=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER16",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "rana.fathy",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AccessFailedCount = 0,
+                            Address = "555 Elderberry Way",
+                            Code = "Code17",
+                            ConcurrencyStamp = "CON_STAMP_USER17",
+                            Country = "Egypt",
+                            Email = "ahmed.yassin@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Ahmed Yassin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AHMED.YASSIN@EXAMPLE.COM",
+                            NormalizedUserName = "AHMED.YASSIN",
+                            PasswordHash = "FGgFdeM7tGTfW6fEVxdNrgZP4a0Zcv0G82Y2xSThUXY=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER17",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "ahmed.yassin",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AccessFailedCount = 0,
+                            Address = "666 Fir Path",
+                            Code = "Code18",
+                            ConcurrencyStamp = "CON_STAMP_USER18",
+                            Country = "Egypt",
+                            Email = "tamer.essam@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Tamer Essam",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TAMER.ESSAM@EXAMPLE.COM",
+                            NormalizedUserName = "TAMER.ESSAM",
+                            PasswordHash = "M5FVv+lT7yZ9v70tZEdpVmhWWNSQZlvR+KNHi0jC7RU=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER18",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "tamer.essam",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AccessFailedCount = 0,
+                            Address = "777 Ginko Glade",
+                            Code = "Code19",
+                            ConcurrencyStamp = "CON_STAMP_USER19",
+                            Country = "Egypt",
+                            Email = "shaimaa.farouk@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Shaimaa Farouk",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SHAIMAA.FAROUK@EXAMPLE.COM",
+                            NormalizedUserName = "SHAIMAA.FAROUK",
+                            PasswordHash = "BPK1VnFq7chUs3VnoxQdXyoGSrL0Wbe1e+VtrB+lOM4=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER19",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "shaimaa.farouk",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AccessFailedCount = 0,
+                            Address = "888 Hawthorn Hts",
+                            Code = "Code20",
+                            ConcurrencyStamp = "CON_STAMP_USER20",
+                            Country = "Egypt",
+                            Email = "ziad.adel@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Ziad Adel",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ZIAD.ADEL@EXAMPLE.COM",
+                            NormalizedUserName = "ZIAD.ADEL",
+                            PasswordHash = "AHxRnnEv2MxNNiQG54pFv+yB3bWyIuTLzO0LYUykCyM=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_USER20",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "ziad.adel",
+                            UserType = 1
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AccessFailedCount = 0,
+                            Address = "القاهرة",
+                            Code = "Code1001",
+                            ConcurrencyStamp = "CON_STAMP_INST1",
+                            Country = "Egypt",
+                            Email = "ahmed.ali@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Ahmed Ali",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AHMED.ALI@EXAMPLE.COM",
+                            NormalizedUserName = "AHMED.ALI",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPvR3R5T8J7f8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_INST1",
+                            Supervisor = true,
+                            TwoFactorEnabled = false,
+                            UserName = "ahmed.ali",
+                            UserType = 2
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AccessFailedCount = 0,
+                            Address = "الإسكندرية",
+                            Code = "Code1002",
+                            ConcurrencyStamp = "CON_STAMP_INST2",
+                            Country = "Egypt",
+                            Email = "mona.hassan@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Mona Hassan",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MONA.HASSAN@EXAMPLE.COM",
+                            NormalizedUserName = "MONA.HASSAN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN0B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_INST2",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "mona.hassan",
+                            UserType = 2
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AccessFailedCount = 0,
+                            Address = "طنطا",
+                            Code = "Code1003",
+                            ConcurrencyStamp = "CON_STAMP_INST3",
+                            Country = "Egypt",
+                            Email = "saeed.abdullah@example.com",
+                            EmailConfirmed = false,
+                            FullName = "Saeed Abdullah",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SAEED.ABDULLAH@EXAMPLE.COM",
+                            NormalizedUserName = "SAEED.ABDULLAH",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_INST3",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "saeed.abdullah",
+                            UserType = 2
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AccessFailedCount = 0,
+                            Address = "المنصورة",
+                            Code = "Code1004",
+                            ConcurrencyStamp = "CON_STAMP_INST4",
+                            Country = "Egypt",
+                            Email = "fatma.mohamed@example.com",
+                            EmailConfirmed = true,
+                            FullName = "Fatma Mohamed",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "FATMA.MOHAMED@EXAMPLE.COM",
+                            NormalizedUserName = "FATMA.MOHAMED",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0U1V2W3X4Y5Z6A7B8C9D0E1F2G3H4I5J6K7L8M9N==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_INST4",
+                            Supervisor = false,
+                            TwoFactorEnabled = false,
+                            UserName = "fatma.mohamed",
+                            UserType = 2
+                        },
+                        new
+                        {
+                            Id = 25,
+                            AccessFailedCount = 0,
+                            Address = "الجيزة",
+                            Code = "Code1005",
+                            ConcurrencyStamp = "CON_STAMP_INST5",
+                            Country = "Egypt",
+                            Email = "ali.ibrahim@example.com",
+                            EmailConfirmed = true,
+                            FullName = "Ali Ibrahim",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ALI.IBRAHIM@EXAMPLE.COM",
+                            NormalizedUserName = "ALI.IBRAHIM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0U1V2W3X4Y5Z6A7B8C9D0E1F2G3H4I5J6K7L8M9N0O==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "SEC_STAMP_INST5",
+                            Supervisor = true,
+                            TwoFactorEnabled = false,
+                            UserName = "ali.ibrahim",
+                            UserType = 2
+                        });
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Identity.UserRefreshToken", b =>
@@ -272,7 +831,7 @@ namespace SchoolProject.infraStructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRefreshToken", (string)null);
+                    b.ToTable("UserRefreshToken");
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Views.Department", b =>
@@ -427,7 +986,7 @@ namespace SchoolProject.infraStructure.Migrations
 
                     b.HasIndex("InsId");
 
-                    b.ToTable("Ins_Subject", (string)null);
+                    b.ToTable("Ins_Subject");
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Views.Instructor", b =>
@@ -450,6 +1009,9 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Property<string>("ENameEn")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -462,13 +1024,19 @@ namespace SchoolProject.infraStructure.Migrations
                     b.Property<int?>("SupervisorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("InsId");
 
                     b.HasIndex("DepartmentID");
 
                     b.HasIndex("SupervisorId");
 
-                    b.ToTable("Instructor", (string)null);
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("instructors");
 
                     b.HasData(
                         new
@@ -478,8 +1046,11 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 9,
                             ENameAr = "أحمد علي",
                             ENameEn = "Ahmed Ali",
+                            Email = "ahmed.ali@example.com",
                             Position = "أستاذ",
-                            Salary = 12000m
+                            Salary = 12000m,
+                            SupervisorId = 1,
+                            UserId = 21
                         },
                         new
                         {
@@ -488,9 +1059,11 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 1,
                             ENameAr = "منى حسن",
                             ENameEn = "Mona Hassan",
+                            Email = "mona.hassan@example.com",
                             Position = "معيد",
                             Salary = 8000m,
-                            SupervisorId = 2
+                            SupervisorId = 2,
+                            UserId = 22
                         },
                         new
                         {
@@ -499,8 +1072,11 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 10,
                             ENameAr = "سعيد عبد الله",
                             ENameEn = "Saeed Abdullah",
+                            Email = "saeed.abdullah@example.com",
                             Position = "دكتور",
-                            Salary = 11000m
+                            Salary = 11000m,
+                            SupervisorId = 3,
+                            UserId = 23
                         },
                         new
                         {
@@ -509,9 +1085,11 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 4,
                             ENameAr = "فاطمة محمد",
                             ENameEn = "Fatma Mohamed",
+                            Email = "fatma.mohamed@example.com",
                             Position = "أستاذ مساعد",
                             Salary = 9500m,
-                            SupervisorId = 3
+                            SupervisorId = 3,
+                            UserId = 24
                         },
                         new
                         {
@@ -520,61 +1098,10 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 7,
                             ENameAr = "علي إبراهيم",
                             ENameEn = "Ali Ibrahim",
+                            Email = "ali.ibrahim@example.com",
                             Position = "معيد",
-                            Salary = 7500m
-                        },
-                        new
-                        {
-                            InsId = 6,
-                            Address = "أسيوط",
-                            DepartmentID = 3,
-                            ENameAr = "نهى محمود",
-                            ENameEn = "Noha Mahmoud",
-                            Position = "دكتور",
-                            Salary = 10000m,
-                            SupervisorId = 5
-                        },
-                        new
-                        {
-                            InsId = 7,
-                            Address = "سوهاج",
-                            DepartmentID = 1,
-                            ENameAr = "مصطفى عبد الرحمن",
-                            ENameEn = "Mostafa Abdelrahman",
-                            Position = "أستاذ",
-                            Salary = 13000m
-                        },
-                        new
-                        {
-                            InsId = 8,
-                            Address = "بورسعيد",
-                            DepartmentID = 2,
-                            ENameAr = "إيمان السيد",
-                            ENameEn = "Eman ElSayed",
-                            Position = "مدرس مساعد",
-                            Salary = 9000m,
-                            SupervisorId = 7
-                        },
-                        new
-                        {
-                            InsId = 9,
-                            Address = "دمياط",
-                            DepartmentID = 5,
-                            ENameAr = "طارق حمدي",
-                            ENameEn = "Tarek Hamdy",
-                            Position = "معيد",
-                            Salary = 7800m
-                        },
-                        new
-                        {
-                            InsId = 10,
-                            Address = "الفيوم",
-                            DepartmentID = 3,
-                            ENameAr = "هالة عبد الفتاح",
-                            ENameEn = "Hala AbdelFattah",
-                            Position = "مدرس",
-                            Salary = 8600m,
-                            SupervisorId = 9
+                            Salary = 7500m,
+                            UserId = 25
                         });
                 });
 
@@ -605,9 +1132,15 @@ namespace SchoolProject.infraStructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("StudID");
 
                     b.HasIndex("DepartmentID");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("students", "Stud");
 
@@ -619,7 +1152,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 1,
                             NameAR = "جون سميث",
                             NameEN = "John Smith",
-                            Phone = "1234567890"
+                            Phone = "1234567890",
+                            UserId = 1
                         },
                         new
                         {
@@ -628,7 +1162,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 2,
                             NameAR = "علي أحمد",
                             NameEN = "Ali Ahmed",
-                            Phone = "9876543210"
+                            Phone = "9876543210",
+                            UserId = 2
                         },
                         new
                         {
@@ -636,7 +1171,8 @@ namespace SchoolProject.infraStructure.Migrations
                             Address = "Alexandria",
                             NameAR = "سارة كمال",
                             NameEN = "Sara Kamal",
-                            Phone = "01112345678"
+                            Phone = "01112345678",
+                            UserId = 3
                         },
                         new
                         {
@@ -645,7 +1181,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 1,
                             NameAR = "فاطمة عادل",
                             NameEN = "Fatma Adel",
-                            Phone = "01234567890"
+                            Phone = "01234567890",
+                            UserId = 4
                         },
                         new
                         {
@@ -654,7 +1191,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 3,
                             NameAR = "محمد طارق",
                             NameEN = "Mohamed Tarek",
-                            Phone = "01098765432"
+                            Phone = "01098765432",
+                            UserId = 5
                         },
                         new
                         {
@@ -663,7 +1201,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 2,
                             NameAR = "نور حسن",
                             NameEN = "Nour Hassan",
-                            Phone = "01555555555"
+                            Phone = "01555555555",
+                            UserId = 6
                         },
                         new
                         {
@@ -671,7 +1210,8 @@ namespace SchoolProject.infraStructure.Migrations
                             Address = "Aswan",
                             NameAR = "يوسف صالح",
                             NameEN = "Yousef Saleh",
-                            Phone = "01111111111"
+                            Phone = "01111111111",
+                            UserId = 7
                         },
                         new
                         {
@@ -680,7 +1220,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 1,
                             NameAR = "ليلى مصطفى",
                             NameEN = "Laila Mostafa",
-                            Phone = "01222222222"
+                            Phone = "01222222222",
+                            UserId = 8
                         },
                         new
                         {
@@ -689,7 +1230,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 2,
                             NameAR = "هاني عمر",
                             NameEN = "Hani Omar",
-                            Phone = "01033333333"
+                            Phone = "01033333333",
+                            UserId = 9
                         },
                         new
                         {
@@ -698,7 +1240,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 3,
                             NameAR = "منى إيهاب",
                             NameEN = "Mona Ehab",
-                            Phone = "01044444444"
+                            Phone = "01044444444",
+                            UserId = 10
                         },
                         new
                         {
@@ -707,7 +1250,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 2,
                             NameAR = "كريم نبيل",
                             NameEN = "Kareem Nabil",
-                            Phone = "01255555555"
+                            Phone = "01255555555",
+                            UserId = 11
                         },
                         new
                         {
@@ -716,7 +1260,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 1,
                             NameAR = "أميرة سمير",
                             NameEN = "Amira Samir",
-                            Phone = "01166666666"
+                            Phone = "01166666666",
+                            UserId = 12
                         },
                         new
                         {
@@ -724,7 +1269,8 @@ namespace SchoolProject.infraStructure.Migrations
                             Address = "Qena",
                             NameAR = "أسامة إبراهيم",
                             NameEN = "Osama Ibrahim",
-                            Phone = "01577777777"
+                            Phone = "01577777777",
+                            UserId = 13
                         },
                         new
                         {
@@ -733,7 +1279,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 3,
                             NameAR = "نادين شريف",
                             NameEN = "Nadine Sherif",
-                            Phone = "01088888888"
+                            Phone = "01088888888",
+                            UserId = 14
                         },
                         new
                         {
@@ -742,7 +1289,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 2,
                             NameAR = "حسام علي",
                             NameEN = "Hossam Ali",
-                            Phone = "01299999999"
+                            Phone = "01299999999",
+                            UserId = 15
                         },
                         new
                         {
@@ -751,7 +1299,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 1,
                             NameAR = "رنا فتحي",
                             NameEN = "Rana Fathy",
-                            Phone = "01012121212"
+                            Phone = "01012121212",
+                            UserId = 16
                         },
                         new
                         {
@@ -759,7 +1308,8 @@ namespace SchoolProject.infraStructure.Migrations
                             Address = "Damietta",
                             NameAR = "أحمد ياسين",
                             NameEN = "Ahmed Yassin",
-                            Phone = "01123232323"
+                            Phone = "01123232323",
+                            UserId = 17
                         },
                         new
                         {
@@ -768,7 +1318,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 2,
                             NameAR = "تامر عصام",
                             NameEN = "Tamer Essam",
-                            Phone = "01534343434"
+                            Phone = "01534343434",
+                            UserId = 18
                         },
                         new
                         {
@@ -777,7 +1328,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 3,
                             NameAR = "شيماء فاروق",
                             NameEN = "Shaimaa Farouk",
-                            Phone = "01045454545"
+                            Phone = "01045454545",
+                            UserId = 19
                         },
                         new
                         {
@@ -786,94 +1338,8 @@ namespace SchoolProject.infraStructure.Migrations
                             DepartmentID = 1,
                             NameAR = "زياد عادل",
                             NameEN = "Ziad Adel",
-                            Phone = "01256565656"
-                        },
-                        new
-                        {
-                            StudID = 21,
-                            Address = "Sohag",
-                            DepartmentID = 2,
-                            NameAR = "ندى إبراهيم",
-                            NameEN = "Nada Ibrahim",
-                            Phone = "01167676767"
-                        },
-                        new
-                        {
-                            StudID = 22,
-                            Address = "Matruh",
-                            NameAR = "عمر رضا",
-                            NameEN = "Omar Reda",
-                            Phone = "01578787878"
-                        },
-                        new
-                        {
-                            StudID = 23,
-                            Address = "Beheira",
-                            DepartmentID = 3,
-                            NameAR = "آية مصطفى",
-                            NameEN = "Aya Mostafa",
-                            Phone = "01089898989"
-                        },
-                        new
-                        {
-                            StudID = 24,
-                            Address = "Gharbia",
-                            DepartmentID = 1,
-                            NameAR = "محمود خالد",
-                            NameEN = "Mahmoud Khaled",
-                            Phone = "01290909090"
-                        },
-                        new
-                        {
-                            StudID = 25,
-                            Address = "Qalyubia",
-                            DepartmentID = 2,
-                            NameAR = "ريم يونس",
-                            NameEN = "Reem Younis",
-                            Phone = "01111122333"
-                        },
-                        new
-                        {
-                            StudID = 26,
-                            Address = "Sharqia",
-                            NameAR = "باسل عماد",
-                            NameEN = "Bassel Emad",
-                            Phone = "01522233444"
-                        },
-                        new
-                        {
-                            StudID = 27,
-                            Address = "Red Sea",
-                            DepartmentID = 3,
-                            NameAR = "فرح حاتم",
-                            NameEN = "Farah Hatem",
-                            Phone = "01033344555"
-                        },
-                        new
-                        {
-                            StudID = 28,
-                            Address = "New Valley",
-                            DepartmentID = 1,
-                            NameAR = "مصطفى عمرو",
-                            NameEN = "Mostafa Amr",
-                            Phone = "01244455666"
-                        },
-                        new
-                        {
-                            StudID = 29,
-                            Address = "North Sinai",
-                            DepartmentID = 2,
-                            NameAR = "جنى حسام",
-                            NameEN = "Jana Hossam",
-                            Phone = "01155566777"
-                        },
-                        new
-                        {
-                            StudID = 30,
-                            Address = "South Sinai",
-                            NameAR = "أدهم فادي",
-                            NameEN = "Adham Fady",
-                            Phone = "01566677888"
+                            Phone = "01256565656",
+                            UserId = 20
                         });
                 });
 
@@ -1185,9 +1651,17 @@ namespace SchoolProject.infraStructure.Migrations
                         .HasForeignKey("SupervisorId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("SchoolProject.Data.Entities.Identity.User", "User")
+                        .WithOne("Instructor")
+                        .HasForeignKey("SchoolProject.Data.Entities.Views.Instructor", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
 
                     b.Navigation("Supervisor");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Views.Student", b =>
@@ -1196,7 +1670,15 @@ namespace SchoolProject.infraStructure.Migrations
                         .WithMany("Students")
                         .HasForeignKey("DepartmentID");
 
+                    b.HasOne("SchoolProject.Data.Entities.Identity.User", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("SchoolProject.Data.Entities.Views.Student", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Views.StudentSubjects", b =>
@@ -1220,6 +1702,12 @@ namespace SchoolProject.infraStructure.Migrations
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Identity.User", b =>
                 {
+                    b.Navigation("Instructor")
+                        .IsRequired();
+
+                    b.Navigation("Student")
+                        .IsRequired();
+
                     b.Navigation("UserRefreshTokens");
                 });
 

@@ -25,10 +25,19 @@ namespace SchoolProject.Core.Features.Users.Commands.Validator
         }
         public void ApplyUserValidation()
         {
-            RuleFor(x => x.FullName)
+            RuleFor(x => x.FullNameEN)
                 .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])
                 .MaximumLength(50).WithMessage(_localizer[SharedResourcesKeys.ExceedingTheMaxLength])
                 .NotNull().WithMessage(_localizer[SharedResourcesKeys.Mustnotbenull]);
+            RuleFor(x => x.FullNameAR)
+                .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])
+                .MaximumLength(50).WithMessage(_localizer[SharedResourcesKeys.ExceedingTheMaxLength])
+                .NotNull().WithMessage(_localizer[SharedResourcesKeys.Mustnotbenull]);
+            RuleFor(x => x.Role)
+                .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])
+                .MaximumLength(50).WithMessage(_localizer[SharedResourcesKeys.ExceedingTheMaxLength])
+                .NotNull().WithMessage(_localizer[SharedResourcesKeys.Mustnotbenull]);
+
 
             RuleFor(x => x.UserName)
                 .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])

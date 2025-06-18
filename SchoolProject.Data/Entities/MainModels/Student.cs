@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using SchoolProject.Data.Commons;
+using SchoolProject.Data.Entities.Identity;
 namespace SchoolProject.Data.Entities.Views
 {
     [Table(name: "students", Schema = "Stud")]
@@ -14,6 +15,7 @@ namespace SchoolProject.Data.Entities.Views
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StudID { get; set; }
+        public int UserId { get; set; }
         [StringLength(200)]
         public string? NameEN { get; set; } 
         [StringLength(200)]
@@ -29,5 +31,10 @@ namespace SchoolProject.Data.Entities.Views
         [InverseProperty("Student")]
 
         public ICollection <StudentSubjects> StudentSubjects { get; set; }
+
+        [ForeignKey("UserId")]
+        [InverseProperty("Student")]
+        public User User { get; set; }
+
     }
 }
